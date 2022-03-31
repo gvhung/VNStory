@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP.NET Application</title>
+    @Styles.Render("~/Resources/css")
+
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            @Html.ActionLink("VN Story", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls=".navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">@Html.ActionLink("Hồ sơ học sinh", "Index", "HocSinh", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Sổ điểm", "Index", "SoDiem", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Báo cáo", "Index", "BaoCao", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
+                    </li>
+                    @*<li class="nav-item">@Html.ActionLink("Khối học", "Index", "KhoiHoc", null, new { @class = "nav-link" })</li>*@
+                    <li class="nav-item">@Html.ActionLink("Lớp học", "Index", "LopHoc", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Môn học", "Index", "MonHoc", null, new { @class = "nav-link" })</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </nav>
+
+        <div class="body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+    </div>
+    @Scripts.Render("~/Resources/script")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,20 @@
+[
+  {
+    "outputFileName": "Resources/WebApplication.min.js",
+    "inputFiles": [
+      "Resources/WebApplication.js"
+    ]
+  },
+  {
+    "outputFileName": "Resources/jquery-blockUI-2.70/jquery.blockUI.min.js",
+    "inputFiles": [
+      "Resources/jquery-blockUI-2.70/jquery.blockUI.js"
+    ]
+  },
+  {
+    "outputFileName": "Resources/jquery-dateFormat/jquery-dateFormat.min.js",
+    "inputFiles": [
+      "Resources/jquery-dateFormat/jquery-dateFormat.js"
+    ]
+  }
+]
