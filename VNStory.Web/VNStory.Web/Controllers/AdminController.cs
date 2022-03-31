@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace VNStory.Web.Controllers
 {
-    public class HomeController : Controller
+    public class AdminController : Controller
     {
 
         public ActionResult Index()
@@ -19,7 +19,12 @@ namespace VNStory.Web.Controllers
             return View();
         }
 
-        public ActionResult Chao()
+        public ActionResult Category()
+        {
+            return View();
+        }
+
+        public ActionResult Story()
         {
             return View();
         }
