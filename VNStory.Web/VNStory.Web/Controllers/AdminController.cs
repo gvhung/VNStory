@@ -29,6 +29,16 @@ namespace VNStory.Web.Controllers
             return View();
         }
 
+        public ActionResult CategoryForm()
+        {
+            return View();
+        }
+
+        public ActionResult StoryForm()
+        {
+            return View();
+        }
+
 
     }
 }
