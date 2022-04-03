@@ -1,27 +1,24 @@
-﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin;
-using Owin;
-using System;
-using System.Linq;
-using VNStory.Web.DataContexts;
-using VNStory.Web.Models;
 
-[assembly: OwinStartupAttribute(typeof(VNStory.Web.Startup))]
-namespace VNStory.Web
+namespace VNStory.Web.Migrations
 {
-    public partial class Startup
+    using System;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+    using VNStory.Web.DataContexts;
+    using VNStory.Web.Models;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
-
-        ApplicationDbContext dbContext = new ApplicationDbContext();
-
-        public void Configuration(IAppBuilder app)
+        public Configuration()
         {
-            ConfigureAuth(app);
-            CreateDefaultRolesAndUser();
+            this.AutomaticMigrationsEnabled = true;
+            this.AutomaticMigrationDataLossAllowed = true;
+            ContextKey = $"VNStory.Web.DataContexts.{nameof(ApplicationDbContext)}";
         }
 
-        public void CreateDefaultRolesAndUser()
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -36,17 +33,17 @@ namespace VNStory.Web
 			 * PhoneNumber = Role(s)
 			 */
             var defaultUsers = new[] {
-                new ApplicationUser {UserName = "gvhung", Email = "gvhung@hotmail.com", PasswordHash = "1234@5678", EmailConfirmed = true}
+                new ApplicationUser {UserName = "gvhung", Email = "gvhung@hotmail.com", PasswordHash = "W#lcome!"}
             };
 
             // check for exist role
             foreach (var defaultRole in defaultRoles)
             {
-                if (dbContext.Roles.Any(r => r.Name == defaultRole))
+                if (context.Roles.Any(r => r.Name == defaultRole))
                 {
                     continue;
                 }
-                var roleStore = new RoleStore<IdentityRole>(dbContext);
+                var roleStore = new RoleStore<IdentityRole>(context);
                 var roleManager = new RoleManager<IdentityRole>(roleStore);
                 var newRole = new IdentityRole { Name = defaultRole };
 
@@ -61,11 +58,11 @@ namespace VNStory.Web
             // check for existing user
             foreach (var user in defaultUsers)
             {
-                if (dbContext.Users.Any(u => u.UserName == user.UserName))
+                if (context.Users.Any(u => u.UserName == user.UserName))
                 {
                     continue;
                 }
-                var userStore = new UserStore<ApplicationUser>(dbContext);
+                var userStore = new UserStore<ApplicationUser>(context);
                 var userManager = new UserManager<ApplicationUser>(userStore);
                 var newUser = new ApplicationUser { UserName = user.UserName, Email = user.Email };
 
@@ -90,8 +87,6 @@ namespace VNStory.Web
                 //    throw new Exception(resultUserRole.Errors.First());
                 //}
             }
-
         }
-
     }
 }

@@ -5,13 +5,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
-using WebApplication.Context;
+using VNStory.Web.DataContexts;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using WebApplication.Models;
+using VNStory.Web.Models;
 using System.Net.Mail;
 
 namespace VNStory.Web
