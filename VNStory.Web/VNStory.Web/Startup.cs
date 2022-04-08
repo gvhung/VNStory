@@ -4,8 +4,8 @@ using Microsoft.Owin;
 using Owin;
 using System;
 using System.Linq;
+using VNStory.Web.Areas.Membership.Models;
 using VNStory.Web.DataContexts;
-using VNStory.Web.Models;
 
 [assembly: OwinStartupAttribute(typeof(VNStory.Web.Startup))]
 namespace VNStory.Web

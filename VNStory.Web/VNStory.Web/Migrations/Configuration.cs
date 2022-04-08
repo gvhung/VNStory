@@ -6,8 +6,8 @@ namespace VNStory.Web.Migrations
     using System;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using VNStory.Web.DataContexts;
-    using VNStory.Web.Models;
+    using VNStory.Web.Areas.Membership.Models;
+    using VNStory.Web.DataContexts;    
 
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
@@ -33,7 +33,7 @@ namespace VNStory.Web.Migrations
 			 * PhoneNumber = Role(s)
 			 */
             var defaultUsers = new[] {
-                new ApplicationUser {UserName = "gvhung", Email = "gvhung@hotmail.com", PasswordHash = "W#lcome!"}
+                new ApplicationUser {UserName = "gvhung", Email = "gvhung@hotmail.com", PasswordHash = "1234@5678", EmailConfirmed = true }
             };
 
             // check for exist role
@@ -64,28 +64,20 @@ namespace VNStory.Web.Migrations
                 }
                 var userStore = new UserStore<ApplicationUser>(context);
                 var userManager = new UserManager<ApplicationUser>(userStore);
-                var newUser = new ApplicationUser { UserName = user.UserName, Email = user.Email };
 
                 // add user
-                var resultUser = userManager.Create(newUser, user.PasswordHash);
+                var resultUser = userManager.Create(user, user.PasswordHash);
                 if (!resultUser.Succeeded)
                 {
                     throw new Exception(resultUser.Errors.First());
                 }
 
                 // add role to the user
-                var resultUserRole = userManager.AddToRole(newUser.Id, defaultAdminRole);
+                var resultUserRole = userManager.AddToRole(user.Id, defaultAdminRole);
                 if (!resultUserRole.Succeeded)
                 {
                     throw new Exception(resultUserRole.Errors.First());
                 }
-
-                //// lets just add another role to the user
-                //resultUserRole = userManager.AddToRole(newUser.Id, defaultUserRole);
-                //if (!resultUserRole.Succeeded)
-                //{
-                //    throw new Exception(resultUserRole.Errors.First());
-                //}
             }
         }
     }

@@ -19,7 +19,12 @@ namespace VNStory.Web.Controllers
             return View();
         }
 
-        public ActionResult Chao()
+        public ActionResult Category()
+        {
+            return View();
+        }
+
+        public ActionResult Store()
         {
             return View();
         }

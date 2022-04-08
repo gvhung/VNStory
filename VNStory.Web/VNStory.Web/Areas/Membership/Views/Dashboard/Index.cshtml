@@ -1,0 +1,16 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+<div>
+    <h2>Welcome to Admin Module User Management Functionalities...</h2>
+    <p>
+        @Html.ActionLink(linkText: "Quản lý nhóm người dùng", actionName: "Index", routeValues: new { controller = "Roles", area = "Membership" })
+    </p>
+    <p>
+        @Html.ActionLink(linkText: "Quản lý người dùng", actionName: "Index", routeValues: new { controller = "Users", area = "Membership" })
+    </p>
+    <p>
+        @Html.ActionLink(linkText: "Hồ sơ cá nhân", actionName: "Index", routeValues: new { controller = "Manage", area = "Membership" })
+    </p>
+    <p>
+        @Html.ActionLink(linkText: "Trở lại trang chủ", actionName: "Index", routeValues: new { controller = "Home", area = "" })
+    </p>
+</div>

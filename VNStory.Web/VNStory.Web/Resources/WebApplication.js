@@ -9,6 +9,14 @@ function getRootUrl() {
 
 $(document).ready(function () {
 
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.dropdown-menu').forEach(function (element) {
+            element.addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+        })
+    });
+
     //$("div#Nhap_Diem_ActionButton").hide();
     //$("div#Xep_Loai_ActionButton").hide();
 

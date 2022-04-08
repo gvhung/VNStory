@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using VNStory.Web.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using VNStory.Web.Areas.Membership.Models;
 
 namespace VNStory.Web.DataContexts
 {
@@ -17,6 +18,9 @@ namespace VNStory.Web.DataContexts
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<CategoryInfo> Categories { get; set; }
+        public System.Data.Entity.DbSet<StoryInfo> Stories { get; set; }
 
     }
 }

@@ -1,23 +1,35 @@
 ﻿@using Microsoft.AspNet.Identity
-<div class="justify-content-end">
-    @if (Request.IsAuthenticated)
-    {
-        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "d-flex" }))
-        {
-            @Html.AntiForgeryToken()
-            <ul class="navbar-nav mb-lg-0">
-                <li class="nav-item">
-                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
-                </li>
-                <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Log off</a></li>
-            </ul>
-        }
-    }
-    else
-    {
-        <ul class="navbar-nav mb-lg-0">
-            <li class="nav-item">@Html.ActionLink("Đăng ký", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
-            <li class="nav-item">@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
+@if (Request.IsAuthenticated)
+{
+    <div class="dropdown text-end">
+        <a href="#" class="btn btn-success text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <span>Hello @User.Identity.GetUserName()</span>
+        </a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+            <li>
+                @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Manage", routeValues: new { Area = "Membership" }, htmlAttributes: new { @class = "dropdown-item" })
+            </li>
+            <li>
+                @Html.ActionLink("External logins", "ManageLogins", "Manage", routeValues: new { Area = "Membership" }, htmlAttributes: new { @class = "dropdown-item" })
+            </li>
+            <li>
+                @Html.ActionLink("Hồ sơ", "Index", "Manage", routeValues: new { Area = "Membership" }, htmlAttributes: new { @class = "dropdown-item" })
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                @using (Html.BeginForm("LogOff", "Account", routeValues: new { Area = "Membership" }, FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">Log off</a>
+                }
+            </li>
         </ul>
-    }
-</div>
+    </div>
+}
+else
+{
+    <div class="text-end">
+        @Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: new { Area = "Membership" }, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("Đăng ký", "Register", "Account", routeValues: new { Area = "Membership" }, htmlAttributes: new { @class = "btn btn-success" })
+    </div>
+}

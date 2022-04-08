@@ -11,8 +11,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using VNStory.Web.Models;
 using System.Net.Mail;
+using VNStory.Web.Areas.Membership.Models;
 
 namespace VNStory.Web
 {
@@ -63,21 +63,11 @@ namespace VNStory.Web
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = false,
             };
-
-            //// Configure validation logic for passwords
-            //manager.PasswordValidator = new PasswordValidator
-            //{
-            //    RequiredLength = 6,
-            //    RequireNonLetterOrDigit = false,
-            //    RequireDigit = true,
-            //    RequireLowercase = true,
-            //    RequireUppercase = false,
-            //};
 
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;

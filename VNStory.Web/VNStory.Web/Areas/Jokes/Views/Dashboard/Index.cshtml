@@ -1,0 +1,19 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div>
+    <h2>Welcome to Jokes Module Management Functionalities...</h2>
+    <p>
+        @Html.ActionLink(linkText: "Approve Users", actionName: "ApproveUsers")
+    </p>
+    <p>
+        @Html.ActionLink(linkText: "Approve Users", actionName: "Home", controllerName: "AdminMain")
+    </p>
+    <p>
+        @Html.ActionLink(linkText: "View Order Summary", actionName: "OrderSummary", routeValues:
+                          new { controller = "Home", area = "Order" })
+    </p>
+    <p>
+        @Html.ActionLink(linkText: "Back to Home", actionName: "Index", routeValues:
+                          new { controller = "Home", area = "" })
+    </p>
+</div>

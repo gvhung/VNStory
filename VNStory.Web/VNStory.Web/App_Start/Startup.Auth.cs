@@ -6,7 +6,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using VNStory.Web.Models;
+using VNStory.Web.Areas.Membership.Models;
 
 namespace VNStory.Web
 {
@@ -26,7 +26,7 @@ namespace VNStory.Web
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),
+                LoginPath = new PathString("/Membership/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.
