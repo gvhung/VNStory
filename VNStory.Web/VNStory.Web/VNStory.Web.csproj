@@ -342,6 +342,7 @@
     <Content Include="Resources\jquery\jquery-3.5.0.slim.min.js" />
     <Content Include="Resources\jquery\jquery-migrate-3.1.0.js" />
     <Content Include="Resources\jquery\jquery-migrate-3.1.0.min.js" />
+    <Content Include="Resources\StyleSheet.css" />
     <Content Include="Resources\tablesorter-2.31.3\css\dragtable.mod.min.css" />
     <Content Include="Resources\tablesorter-2.31.3\css\filter.formatter.min.css" />
     <Content Include="Resources\tablesorter-2.31.3\css\highlights.min.css" />

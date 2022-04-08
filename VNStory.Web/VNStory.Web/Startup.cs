@@ -13,6 +13,8 @@ namespace VNStory.Web
     public partial class Startup
     {
 
+        //https://www.webtruyenonline.net/
+
         ApplicationDbContext dbContext = new ApplicationDbContext();
 
         public void Configuration(IAppBuilder app)
@@ -65,30 +67,24 @@ namespace VNStory.Web
                 {
                     continue;
                 }
+
                 var userStore = new UserStore<ApplicationUser>(dbContext);
                 var userManager = new UserManager<ApplicationUser>(userStore);
-                var newUser = new ApplicationUser { UserName = user.UserName, Email = user.Email };
 
                 // add user
-                var resultUser = userManager.Create(newUser, user.PasswordHash);
+                var resultUser = userManager.Create(user, user.PasswordHash);
                 if (!resultUser.Succeeded)
                 {
                     throw new Exception(resultUser.Errors.First());
                 }
 
                 // add role to the user
-                var resultUserRole = userManager.AddToRole(newUser.Id, defaultAdminRole);
+                var resultUserRole = userManager.AddToRole(user.Id, defaultAdminRole);
                 if (!resultUserRole.Succeeded)
                 {
                     throw new Exception(resultUserRole.Errors.First());
                 }
 
-                //// lets just add another role to the user
-                //resultUserRole = userManager.AddToRole(newUser.Id, defaultUserRole);
-                //if (!resultUserRole.Succeeded)
-                //{
-                //    throw new Exception(resultUserRole.Errors.First());
-                //}
             }
 
         }
