@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -8,6 +10,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using VNStory.Web.DataContexts;
 using VNStory.Web.Models;
 
 namespace VNStory.Web.Controllers
@@ -15,6 +18,8 @@ namespace VNStory.Web.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private IAuthenticationManager _authenticationMangaer;
@@ -718,6 +723,79 @@ namespace VNStory.Web.Controllers
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
+
+        public ActionResult Info()
+        {
+            if (Request.IsAuthenticated == false)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            ApplicationUser applicationUser = db.Users.Find(User.Identity.GetUserId());
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(applicationUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Info([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(applicationUser).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(applicationUser);
+        }
+
+        public ActionResult NewStory()
+        {
+            if (Request.IsAuthenticated == false)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            //ApplicationUser applicationUser = db.Users.Find(User.Identity.GetUserId());
+            //if (applicationUser == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(applicationUser);
+            return View();
+        }
+
+        public ActionResult ListStory()
+        {
+            if (Request.IsAuthenticated == false)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            //ApplicationUser applicationUser = db.Users.Find(User.Identity.GetUserId());
+            //if (applicationUser == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(applicationUser);
+            return View();
+        }
+
+        public ActionResult WishesStory()
+        {
+            if (Request.IsAuthenticated == false)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            //ApplicationUser applicationUser = db.Users.Find(User.Identity.GetUserId());
+            //if (applicationUser == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(applicationUser);
+            return View();
+        }
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins

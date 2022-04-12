@@ -575,6 +575,10 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Account\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\Info.cshtml" />
+    <Content Include="Views\Account\NewStory.cshtml" />
+    <Content Include="Views\Account\ListStory.cshtml" />
+    <Content Include="Views\Account\WishesStory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNet.Identity
+@model VNStory.Web.Models.IndexViewModel
+@{
+    ViewBag.Title = "Danh sách truyện đã đăng của [" + @User.Identity.GetUserName() + "]";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+
+</div>

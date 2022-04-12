@@ -7,22 +7,40 @@
         </a>
         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
             <li>
-                @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                @Html.ActionLink("Đăng truyện mới", "NewStory", "Account", routeValues: new { Area = "" }, htmlAttributes: new { @class = "dropdown-item" })
             </li>
             <li>
-                @Html.ActionLink("External logins", "ManageLogins", "Account", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                @Html.ActionLink("Truyện của bạn", "ListStory", "Account", routeValues: new { Area = "" }, htmlAttributes: new { @class = "dropdown-item" })
             </li>
             <li>
-                @Html.ActionLink("Hồ sơ", "Index", "Account", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                @Html.ActionLink("Truyện yêu thích", "WishesStory", "Account", routeValues: new { Area = "" }, htmlAttributes: new { @class = "dropdown-item" })
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Account", routeValues: new { Area = "" }, htmlAttributes: new { @class = "dropdown-item" })
+            </li>
+            <li>
+                @Html.ActionLink("Thông tin cá nhân", "Info", "Account", routeValues: new { Area = "" }, htmlAttributes: new { @class = "dropdown-item" })
             </li>
             @if (User.IsInRole("Administrators") == true)
             {
                 <li><hr class="dropdown-divider"></li>
+                <!--
                 <li>
-                    @Html.ActionLink("Danh sách người dùng", "Index", "Users", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })
+                    @Html.ActionLink("External logins", "ManageLogins", "Account", routeValues: new { Area = "" }, htmlAttributes: new { @class = "dropdown-item" })
+                </li>
+                    -->
+                <li>
+                    @Html.ActionLink("Thành viên", "Index", "Users", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })
                 </li>
                 <li>
-                    @Html.ActionLink("Danh sách nhóm người dùng", "Index", "Roles", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })
+                    @Html.ActionLink("Nhóm thành viên", "Index", "Roles", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })
+                </li>
+                <li>
+                    @Html.ActionLink("Thể loại truyện", "Index", "Category", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })
+                </li>
+                <li>
+                    @Html.ActionLink("Danh sách truyện", "Index", "Story", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })
                 </li>
             }
             <li><hr class="dropdown-divider"></li>
@@ -39,7 +57,7 @@
 else
 {
     <div class="text-end">
-        @Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
-        @Html.ActionLink("Đăng ký", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
+        @Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: new { Area = "" }, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("Đăng ký", "Register", "Account", routeValues: new { Area = "" }, htmlAttributes: new { @class = "btn btn-success" })
     </div>
 }
