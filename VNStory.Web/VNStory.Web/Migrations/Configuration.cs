@@ -6,7 +6,7 @@ namespace VNStory.Web.Migrations
     using System;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using VNStory.Web.Areas.Membership.Models;
+    using VNStory.Web.Models;
     using VNStory.Web.DataContexts;    
 
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>

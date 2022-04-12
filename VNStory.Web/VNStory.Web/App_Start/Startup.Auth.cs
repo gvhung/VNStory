@@ -6,7 +6,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using VNStory.Web.Areas.Membership.Models;
+using VNStory.Web.Models;
 
 namespace VNStory.Web
 {

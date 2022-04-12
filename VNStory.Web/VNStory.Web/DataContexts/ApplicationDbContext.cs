@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using VNStory.Web.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
-using VNStory.Web.Areas.Membership.Models;
+using VNStory.Web.Areas.Admin.Models;
 
 namespace VNStory.Web.DataContexts
 {

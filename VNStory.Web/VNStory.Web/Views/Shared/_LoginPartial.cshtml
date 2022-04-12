@@ -7,17 +7,27 @@
         </a>
         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
             <li>
-                @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Manage", routeValues: new { Area = "Membership" }, htmlAttributes: new { @class = "dropdown-item" })
+                @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
             </li>
             <li>
-                @Html.ActionLink("External logins", "ManageLogins", "Manage", routeValues: new { Area = "Membership" }, htmlAttributes: new { @class = "dropdown-item" })
+                @Html.ActionLink("External logins", "ManageLogins", "Account", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
             </li>
             <li>
-                @Html.ActionLink("Hồ sơ", "Index", "Manage", routeValues: new { Area = "Membership" }, htmlAttributes: new { @class = "dropdown-item" })
+                @Html.ActionLink("Hồ sơ", "Index", "Account", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
             </li>
+            @if (User.IsInRole("Administrators") == true)
+            {
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    @Html.ActionLink("Danh sách người dùng", "Index", "Users", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })
+                </li>
+                <li>
+                    @Html.ActionLink("Danh sách nhóm người dùng", "Index", "Roles", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })
+                </li>
+            }
             <li><hr class="dropdown-divider"></li>
             <li>
-                @using (Html.BeginForm("LogOff", "Account", routeValues: new { Area = "Membership" }, FormMethod.Post, new { id = "logoutForm" }))
+                @using (Html.BeginForm("LogOff", "Account", routeValues: null, FormMethod.Post, new { id = "logoutForm" }))
                 {
                     @Html.AntiForgeryToken()
                     <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">Log off</a>
@@ -29,7 +39,7 @@
 else
 {
     <div class="text-end">
-        @Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: new { Area = "Membership" }, htmlAttributes: new { @class = "btn btn-primary" })
-        @Html.ActionLink("Đăng ký", "Register", "Account", routeValues: new { Area = "Membership" }, htmlAttributes: new { @class = "btn btn-success" })
+        @Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("Đăng ký", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
     </div>
 }

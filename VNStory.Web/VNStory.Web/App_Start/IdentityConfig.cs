@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using System.Net.Mail;
-using VNStory.Web.Areas.Membership.Models;
+using VNStory.Web.Models;
 
 namespace VNStory.Web
 {
