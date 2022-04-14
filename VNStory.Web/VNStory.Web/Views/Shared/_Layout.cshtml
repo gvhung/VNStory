@@ -2,10 +2,15 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="MSThemeCompatible" content="no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
+    <link rel="icon" href="@Url.Content("~/favicon.ico")" type="image/ico" />
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" type="image/x-icon" />
     <title>ASP.NET Application</title>
     @Styles.Render("~/Resources/css")
-
 </head>
 <body>
     <div class="container">
@@ -15,6 +20,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse" id="collapseNavbar">
+                
                 <ul class="navbar-nav me-auto">
                     @Html.Partial("_ListPartial")
                     <li class="nav-item">
@@ -22,7 +28,11 @@
                     </li>
                     @Html.Partial("_CategoryPartial")
                 </ul>
-                @Html.Partial("_SearchPartial")
+                
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    @Html.Partial("_SearchPartial")
+                </form>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </nav>

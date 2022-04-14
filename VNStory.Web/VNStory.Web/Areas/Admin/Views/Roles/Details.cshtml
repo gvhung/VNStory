@@ -4,21 +4,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    <h4>RoleViewModel</h4>
+<div class="container-fluid">
+    <h4>Nhóm người dùng</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.Name)</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.Name)</label>
+    </div>
+    <div class="col-12">
+        @Html.ActionLink("Chỉnh sửa", "Edit", "Roles", routeValues: new { Area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("Trở lại", "Index", "Roles", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" })
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

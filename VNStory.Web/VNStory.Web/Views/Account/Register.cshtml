@@ -14,7 +14,7 @@
     <div class="mb-3">
         @Html.LabelFor(m => m.Email, new { @class = "form-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @autocomplete = "off" })
         </div>
     </div>
     <div class="mb-3">

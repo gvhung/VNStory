@@ -41,6 +41,7 @@ namespace VNStory.Web
                 "~/Resources/StyleSheet."+minify+"css",
                 "~/Resources/jquery-ui-1.12.1/jquery-ui."+minify+"css",
                 "~/Resources/bootstrap-5.1.3/css/bootstrap."+minify+"css",
+                "~/Resources/bootstrap-icons-1.8.1/bootstrap-icons."+minify+"css",
                 "~/Resources/tablesorter-2.31.3/css/theme.blue."+minify+"css"
             };
 

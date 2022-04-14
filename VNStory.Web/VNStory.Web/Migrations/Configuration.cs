@@ -13,8 +13,8 @@ namespace VNStory.Web.Migrations
     {
         public Configuration()
         {
-            this.AutomaticMigrationsEnabled = true;
-            this.AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = false;
             ContextKey = $"VNStory.Web.DataContexts.{nameof(ApplicationDbContext)}";
         }
 
