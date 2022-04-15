@@ -173,6 +173,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Resources\bootstrap-5.1.3\css\bootstrap-grid.css" />
     <Content Include="Resources\bootstrap-5.1.3\css\bootstrap-grid.min.css" />
@@ -488,6 +489,7 @@
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ToolController.cs" />
     <Compile Include="Areas\Admin\Controllers\StoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
@@ -500,10 +502,18 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Bookmark.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryInfo.cs" />
+    <Compile Include="Models\Chapter.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Reading.cs" />
     <Compile Include="Models\ServerInfo.cs" />
+    <Compile Include="Models\Story.cs" />
     <Compile Include="Models\StoryInfo.cs" />
+    <Compile Include="Models\Subscription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -522,6 +532,9 @@
     <Content Include="Areas\Admin\Views\Roles\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Story\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tool\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Resources\jquery\jquery-3.4.1.min.map" />
     <Content Include="Resources\jquery\jquery-3.5.0.slim.min.map" />
