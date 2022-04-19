@@ -535,6 +535,9 @@
     <Content Include="Areas\Admin\Views\Story\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Tool\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
     <None Include="packages.config" />
     <Content Include="Resources\jquery\jquery-3.4.1.min.map" />
     <Content Include="Resources\jquery\jquery-3.5.0.slim.min.map" />
