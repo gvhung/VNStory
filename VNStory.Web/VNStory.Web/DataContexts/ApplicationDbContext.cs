@@ -19,8 +19,13 @@ namespace VNStory.Web.DataContexts
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<CategoryInfo> Categories { get; set; }
-        public System.Data.Entity.DbSet<StoryInfo> Stories { get; set; }
-
+        public System.Data.Entity.DbSet<Author> Authors { get; set; }
+        public System.Data.Entity.DbSet<Bookmark> Bookmarks { get; set; }
+        public System.Data.Entity.DbSet<Category> Categories { get; set; }
+        public System.Data.Entity.DbSet<Chapter> Chapters { get; set; }
+        public System.Data.Entity.DbSet<Reading> Readings { get; set; }
+        public System.Data.Entity.DbSet<Story> Stories { get; set; }        
+        
+        
     }
 }

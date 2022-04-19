@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿//using System.Collections.Generic;
 
-namespace VNStory.Web.Models
-{
-    public class ServerInfo
-    {
-        public string ServerUrl { get; set; }
+//namespace VNStory.Web.Models
+//{
+//    public class ServerInfo
+//    {
+//        public string ServerUrl { get; set; }
 
-        public string Version { get; set; }
+//        public string Version { get; set; }
 
-        public List<string> ApiList { get; set; } = new List<string>();
+//        public List<string> ApiList { get; set; } = new List<string>();
 
-    }
-}
+//    }
+//}

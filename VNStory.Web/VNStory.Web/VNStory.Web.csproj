@@ -492,6 +492,7 @@
     <Compile Include="Areas\Admin\Controllers\ToolController.cs" />
     <Compile Include="Areas\Admin\Controllers\StoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Models\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UsersViewModels.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -506,13 +507,11 @@
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\CategoryInfo.cs" />
     <Compile Include="Models\Chapter.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Reading.cs" />
     <Compile Include="Models\ServerInfo.cs" />
     <Compile Include="Models\Story.cs" />
-    <Compile Include="Models\StoryInfo.cs" />
     <Compile Include="Models\Subscription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -535,6 +534,7 @@
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Story\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Tool\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
     <None Include="packages.config" />
     <Content Include="Resources\jquery\jquery-3.4.1.min.map" />
     <Content Include="Resources\jquery\jquery-3.5.0.slim.min.map" />

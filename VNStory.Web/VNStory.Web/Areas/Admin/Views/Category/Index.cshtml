@@ -1,5 +1,88 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+﻿@model IEnumerable<VNStory.Web.Models.Category>
+@{
+    ViewBag.Title = "Thể loại truyện";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<div>
-    <h4>Welcome to Admin Module User Management Functionalities...</h4>
+<div class="container-fluid">
+
+    <h2>Thể loại truyện</h2>
+
+    <div class="row py-1">
+        <div class="col-md-9 me-auto">
+            <h4 class="card-title">Danh sách thể loại truyện</h4>
+        </div>
+        <div class="col-md-3 text-end">
+            @Html.ActionLink("Thêm mới", "Create", "Category", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
+    <div class="row g-5">
+        <div class="col-md-12">
+            <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th scope="col" class="th-sm">
+                            #
+                        </th>
+                        <th scope="col" class="th-sm">
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th scope="col" class="th-sm">
+                            @Html.DisplayNameFor(model => model.Index)
+                        </th>
+                        <th scope="col" class="th-sm">
+                            #
+                        </th>
+                        <th scope="col" class="th-sm">
+                            #
+                        </th>
+                        <th scope="col" class="th-sm">
+                            #
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        var _index = 1;
+
+                        foreach (var item in Model)
+                        {
+                                        <tr>
+                                            <td scope="row">
+                                                @_index
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Index)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id })
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Sửa", "Edit", new { id = item.Id })
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                                            </td>
+                                        </tr>
+                            { _index++; }
+                        }
+                    }
+
+                    @if (_index <= 1)
+                    {
+                        <tr>
+                            <td colspan="5">Không có bản ghi nào</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>

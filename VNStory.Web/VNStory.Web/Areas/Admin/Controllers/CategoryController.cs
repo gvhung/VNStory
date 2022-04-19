@@ -16,15 +16,15 @@ namespace VNStory.Web.Areas.Admin.Controllers
             return View(db.Categories.ToList());
         }
 
-        public ActionResult Details(String id)
-        {
-            var role = db.Categories.Find(id);
-            if (role == null)
-            {
-                return HttpNotFound();
-            }
-            return View(role);
-        }
+        //public ActionResult Details(String id)
+        //{
+        //    var role = db.Categories.Find(id);
+        //    if (role == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(role);
+        //}
 
         public ActionResult Create()
         {
@@ -32,7 +32,7 @@ namespace VNStory.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CategoryInfo role)
+        public ActionResult Create(Category role)
         {
             if (ModelState.IsValid)
             {
@@ -43,49 +43,49 @@ namespace VNStory.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(String id)
-        {
-            var role = db.Categories.Find(id);
-            if (role == null)
-            {
-                return HttpNotFound();
-            }
-            return View();
-        }
+        //public ActionResult Edit(String id)
+        //{
+        //    var role = db.Categories.Find(id);
+        //    if (role == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View();
+        //}
 
-        [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Name")] CategoryInfo role)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(role).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(role);
-        }
+        //[HttpPost]
+        //public ActionResult Edit([Bind(Include = "Id,Name")] Category role)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(role).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(role);
+        //}
 
-        public ActionResult Delete(String id)
-        {
-            var role = db.Categories.Find(id);
-            if (role == null)
-            {
-                return HttpNotFound();
-            }
-            return View();
-        }
+        //public ActionResult Delete(String id)
+        //{
+        //    var role = db.Categories.Find(id);
+        //    if (role == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View();
+        //}
 
-        [HttpPost]
-        public ActionResult Delete(CategoryInfo role)
-        {
-            if (ModelState.IsValid)
-            {
-                var myRole = db.Categories.Find(role.Id);
-                db.Categories.Remove(myRole);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(role);
-        }
+        //[HttpPost]
+        //public ActionResult Delete(CategoryInfo role)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var myRole = db.Categories.Find(role.Id);
+        //        db.Categories.Remove(myRole);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(role);
+        //}
     }
 }
