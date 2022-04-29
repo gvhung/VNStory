@@ -4,11 +4,15 @@ using System.Text;
 
 namespace VNStory.Web.Commons
 {
-     enum StatusInfor
+
+    /// <summary>
+    /// Trạng thái truyện
+    /// </summary>
+    enum StatusInfor
     {
-        Moicapnhat =0,
-        Yeuthich =1,
-        Docnhieu =2,
-        Hoanthanh =3
+        Moicapnhat = 0,
+        Yeuthich = 1,
+        Docnhieu = 2,
+        Hoanthanh = 3
     }
 }

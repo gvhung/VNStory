@@ -32,11 +32,11 @@ namespace VNStory.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Category role)
+        public ActionResult Create(Category categoryItem)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(role);
+                db.Categories.Add(categoryItem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -45,24 +45,24 @@ namespace VNStory.Web.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            var role = db.Categories.Find(id);
-            if (role == null)
+            var categoryItem = db.Categories.Find(id);
+            if (categoryItem == null)
             {
                 return HttpNotFound();
             }
-            return View(role);
+            return View(categoryItem);
         }
 
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Name,Index,ImagePath")] Category role)
+        public ActionResult Edit([Bind(Include = "Id,Name,Index,ImagePath")] Category categoryItem)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(role).State = EntityState.Modified;
+                db.Entry(categoryItem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(role);
+            return View(categoryItem);
         }
 
         public ActionResult Delete(int id)
@@ -76,16 +76,23 @@ namespace VNStory.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(Category role)
+        public ActionResult Delete(Category categoryItem)
         {
             if (ModelState.IsValid)
             {
-                var myRole = db.Categories.Find(role.Id);
-                db.Categories.Remove(myRole);
+                var myCategoryItem = db.Categories.Find(categoryItem.Id);
+                db.Categories.Remove(myCategoryItem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(role);
+            return View(categoryItem);
         }
+
+
+
+
+
+
+
     }
 }

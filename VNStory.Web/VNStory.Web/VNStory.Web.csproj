@@ -493,6 +493,7 @@
     <Compile Include="Areas\Admin\Controllers\StoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Models\CategoryViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\FileUploadModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UsersViewModels.cs" />
     <Compile Include="Commons\Utils.cs" />

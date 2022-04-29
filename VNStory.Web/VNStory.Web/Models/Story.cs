@@ -47,13 +47,13 @@ namespace VNStory.Web.Models
         /// <summary>
         /// Nguồn truyện
         /// </summary>
-        [Display(Name = "nguồn truyện")]
+        [Display(Name = "Nguồn truyện")]
         public string Source { get; set; } = string.Empty;
 
         /// <summary>
         /// Mổ tả Truyện
         /// </summary>
-        [Display(Name = "mô tả")]
+        [Display(Name = "Mô tả")]
         public string Description { get; set; } = string.Empty;
 
         ///// <summary>

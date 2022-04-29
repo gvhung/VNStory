@@ -38,13 +38,13 @@
                             @Html.DisplayNameFor(model => model.Views)
                         </th>
                         <th scope="col" class="th-sm">
-                            
+
                         </th>
                         <th scope="col" class="th-sm">
-                            
+
                         </th>
                         <th scope="col" class="th-sm">
-                            
+
                         </th>
 
                     </tr>
@@ -56,32 +56,51 @@
 
                         foreach (var item in Model)
                         {
-                                        <tr>
-                                            <td scope="row">
-                                                @_index
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Image)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Name)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Status)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Views )
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id })
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Sửa", "Edit", new { id = item.Id })
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
-                                            </td>
-                                        </tr>
+                            <tr>
+                                <td scope="row">
+                                    @_index
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Image)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @{
+                                        string statusName = "";
+                                        if (item.Status == 0)
+                                        {
+                                            statusName = "Mới cập nhật";
+                                        }
+                                        else if (item.Status == 1)
+                                        {
+                                            statusName = "Yêu thích";
+                                        }
+                                        else if (item.Status == 2)
+                                        {
+                                            statusName = "Đọc nhiều";
+                                        }
+                                        else if (item.Status == 0)
+                                        {
+                                            statusName = "Hoàn thành";
+                                        }
+                                    }
+                                    @Html.DisplayName(statusName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Views)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.Id })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.Id })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                                </td>
+                            </tr>
                             { _index++; }
                         }
                     }

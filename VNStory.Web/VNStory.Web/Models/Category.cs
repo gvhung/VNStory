@@ -31,6 +31,7 @@ namespace VNStory.Web.Models
         /// <summary>
         /// Đường dẫn ảnh đại diện
         /// </summary>
+        [DataType(DataType.Upload)]
         [Display(Name = "Ảnh đại diện")]
         public string ImagePath { get; set; } = string.Empty;
 

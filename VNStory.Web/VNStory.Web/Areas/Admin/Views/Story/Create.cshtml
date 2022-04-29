@@ -16,37 +16,37 @@
 
         <div class="mb-3">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên truyện", @autocomplete = "off" } })
+            @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-control", placeholder = "Tên truyện", @autocomplete = "off" })
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
         <div class="mb-3">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "form-label" })
-            @Html.DropDownList("MovieType")
-
+            @Html.DropDownListFor(model => model.Status, ViewBag.ListTrangThai as SelectList, htmlAttributes: new { @class = "form-select" })
         </div>
+        
         @*<div class="mb-3">
             @Html.LabelFor(model => model.AuthorId, htmlAttributes: new { @class = "form-label" })
-            @Html.DropDownList("Authorlist")
-
+            @Html.DropDownListFor(model => model.AuthorId, ViewBag.Authorlist as SelectList, htmlAttributes: new { @class = "form-select" })
         </div>*@
+
         <div class="mb-3">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "form-label" })
-            @Html.TextBoxFor(model => model.Image, htmlAttributes: new { type = "file", @class = "form-control" })
+            @Html.TextBoxFor(model => model.Image, htmlAttributes: new { type = "file", @class = "form-control", placeholder = "Ảnh mô tả", })
         </div>
 
         <div class="mb-3">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "nội dung", @autocomplete = "off" } })
+            @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-control", rows="6" })
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
         <div class="mb-3">
             @Html.LabelFor(model => model.Views, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.Views, new { htmlAttributes = new { @class = "form-control", placeholder = "nội dung", @autocomplete = "off" } })
+            @Html.TextBoxFor(model => model.Views, htmlAttributes: new { @class = "form-control", placeholder = "Lượt xem", @autocomplete = "off" })
             @Html.ValidationMessageFor(model => model.Views, "", new { @class = "text-danger" })
         </div>
         <div class="mb-3">
             @Html.LabelFor(model => model.Source, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.Source, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên truyện", @autocomplete = "off" } })
+            @Html.TextBoxFor(model => model.Source, htmlAttributes: new { @class = "form-control", placeholder = "Nguồn truyện", @autocomplete = "off" })
             @Html.ValidationMessageFor(model => model.Source, "", new { @class = "text-danger" })
         </div>
 

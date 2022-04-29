@@ -28,52 +28,90 @@ namespace VNStory.Web.Areas.Admin.Controllers
             return View(story);
         }
 
-
-
         public ActionResult Create()
         {
+            //Danh sách trạng thái truyện hiển thị cho người dùng chọn
+            List<SelectListItem> listTrangThai = new List<SelectListItem>();
 
-            
-            List<SelectListItem> items = new List<SelectListItem>();
+            //Khai báo biến phần tử trạng thái truyện
+            SelectListItem selectListItem;
+
+            //Duyệt các phần tử trạng thái truyện
             foreach (int item in Enum.GetValues(typeof(StatusInfor)))
             {
-                if (item == 0){
-                
+                //Khởi tạo phần tử trạng thái
+                selectListItem = new SelectListItem();
+
+                //Câu lệnh kiểm tra có điều kiện
+                //Gán  giá trị cho phần tử trạng thái
+                if (item == 0)//Nếu
+                {
+                    //Gán giá trị
+                    selectListItem.Value = item.ToString();
+
+                    //Gán nhãn
+                    selectListItem.Text = "Mới cập nhật";
+                }
+                else if (item == 1)//Không thì nếu
+                {
+                    //Gán giá trị
+                    selectListItem.Value = item.ToString();
+
+                    //Gán nhãn
+                    selectListItem.Text = "Yêu thích";
+                }
+                else if (item == 2)//Không thì nếu
+                {
+                    //Gán giá trị
+                    selectListItem.Value = item.ToString();
+
+                    //Gán nhãn
+                    selectListItem.Text = "Đọc nhiều";
+                }
+                else if (item == 3)//Không thì nếu
+                {
+                    //Gán giá trị
+                    selectListItem.Value = item.ToString();
+
+                    //Gán nhãn
+                    selectListItem.Text = "Hoàn thành";
+                }
+
+                //Kiểm tra trong list trạng thái xem đã thêm phần tử trạng thái vào hay chưa
+                //Nếu chưa có thì thêm vào, có rồi thì bỏ qua
+                if(listTrangThai.Any(p => p.Value == selectListItem.Value) == false)
+                {
+                    //Thêm phần tử trạng thái vào danh sách
+                    listTrangThai.Add(selectListItem);
                 }
 
             }
-            //items.Add(new SelectListItem { Text = "đang cập nhật", Value = "0" });
 
-            //items.Add(new SelectListItem { Text = "drop", Value = "1" });
+            //Lưu vào State của Server để hiển thị trên View
+            //ViewBag.ListTrangThai = listTrangThai;
+            ViewBag.ListTrangThai = new SelectList(listTrangThai, "Value", "Text");
 
-            //items.Add(new SelectListItem { Text = "chuẩn bị ra mắt", Value = "2", Selected = true });
 
-            //items.Add(new SelectListItem { Text = "hoàn thành", Value = "3" });
 
-            ViewBag.MovieType = items;
+            //List<SelectListItem> authorlist = new List<SelectListItem>();
+            //authorlist.Add(new SelectListItem { Text = "Nguyễn Văn A", Value = "0" });
+            //authorlist.Add(new SelectListItem { Text = "Nguyễn Văn B", Value = "1" });
+            //authorlist.Add(new SelectListItem { Text = "Nguyễn Văn C", Value = "2", Selected = true });
+            //authorlist.Add(new SelectListItem { Text = "Nguyễn Văn D", Value = "3" });                       
+            //ViewBag.Authorlist = new SelectList(authorlist, "Value", "Text");
 
-            List<SelectListItem> Authorlist = new List<SelectListItem>();
 
-            Authorlist.Add(new SelectListItem { Text = "đang cập nhật", Value = "0" });
 
-            Authorlist.Add(new SelectListItem { Text = "drop", Value = "1" });
-
-            Authorlist.Add(new SelectListItem { Text = "chuẩn bị ra mắt", Value = "2", Selected = true });
-
-            Authorlist.Add(new SelectListItem { Text = "hoàn thành", Value = "3" });
-
-            ViewBag.Authorlist = Authorlist;
 
             return View();
         }
 
-
         [HttpPost]
-        public ActionResult Create(Story role)
+        public ActionResult Create(Story storyItem)
         {
             if (ModelState.IsValid)
             {
-                db.Stories.Add(role);
+                db.Stories.Add(storyItem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -82,23 +120,104 @@ namespace VNStory.Web.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            var role = db.Stories.Find(id);
-            if (role == null)
+            //Lấy bản ghi có Id = giá trị của param (biến, tham số) Id
+            var storyItem = db.Stories.Find(id);
+
+            if (storyItem == null)
             {
                 return HttpNotFound();
             }
-            return View(role);
+
+            #region Danh sách trạng thái truyện
+
+            //Danh sách trạng thái truyện hiển thị cho người dùng chọn
+            List<SelectListItem> listTrangThai = new List<SelectListItem>();
+
+            //Khai báo biến phần tử trạng thái truyện
+            SelectListItem selectListItem;
+
+            //Duyệt các phần tử trạng thái truyện
+            foreach (int item in Enum.GetValues(typeof(StatusInfor)))
+            {
+                //Khởi tạo phần tử trạng thái
+                selectListItem = new SelectListItem();
+
+                //Câu lệnh kiểm tra có điều kiện
+                //Gán  giá trị cho phần tử trạng thái
+                if (item == 0)//Nếu
+                {
+                    //Gán giá trị
+                    selectListItem.Value = item.ToString();
+
+                    //Gán nhãn
+                    selectListItem.Text = "Mới cập nhật";
+                }
+                else if (item == 1)//Không thì nếu
+                {
+                    //Gán giá trị
+                    selectListItem.Value = item.ToString();
+
+                    //Gán nhãn
+                    selectListItem.Text = "Yêu thích";
+                }
+                else if (item == 2)//Không thì nếu
+                {
+                    //Gán giá trị
+                    selectListItem.Value = item.ToString();
+
+                    //Gán nhãn
+                    selectListItem.Text = "Đọc nhiều";
+                }
+                else if (item == 3)//Không thì nếu
+                {
+                    //Gán giá trị
+                    selectListItem.Value = item.ToString();
+
+                    //Gán nhãn
+                    selectListItem.Text = "Hoàn thành";
+                }
+
+                //Kiểm tra trong list trạng thái xem đã thêm phần tử trạng thái vào hay chưa
+                //Nếu chưa có thì thêm vào, có rồi thì bỏ qua
+                if (listTrangThai.Any(p => p.Value == selectListItem.Value) == false)
+                {
+                    //Thêm phần tử trạng thái vào danh sách
+                    listTrangThai.Add(selectListItem);
+                }
+
+            }
+
+            //Lưu vào State của Server để hiển thị trên View
+            //ViewBag.ListTrangThai = listTrangThai;
+            ViewBag.ListTrangThai = new SelectList(listTrangThai, "Value", "Text");
+
+            #endregion
+
+            return View(storyItem);
         }
 
+        /// <summary>
+        /// Cập Nhật Truyện
+        /// </summary>
+        /// <param name="Story"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Id,Name,Status,Views,Image,Source,Description")] Story Story)
         {
-            if (ModelState.IsValid)
+            //Kiểm tra dữ liệu trước khi lưu vào cơ sở dữ liệu
+            if (ModelState.IsValid)//Nếu hợp lệ
             {
+                //Truyền vào đối tượng truyện cho db context
                 db.Entry(Story).State = EntityState.Modified;
+
+                //Lưu vào cơ sở dữ liệu
                 db.SaveChanges();
+
+                //Chuyển về trang danh sách truyện
                 return RedirectToAction("Index");
             }
+
+            //Nếu có lỗi (không hợp lệ) khi kiểm tra dữ liệu trước khi lưu thì vẫn ở trang hiện tại (trang chỉnh sửa truyện)            
             return View(Story);
         }
 
@@ -113,16 +232,16 @@ namespace VNStory.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(Story role)
+        public ActionResult Delete(Story storyItem)
         {
             if (ModelState.IsValid)
             {
-                var myRole = db.Stories.Find(role.Id);
-                db.Stories.Remove(myRole);
+                var myStoryItem = db.Stories.Find(storyItem.Id);
+                db.Stories.Remove(myStoryItem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(role);
+            return View(storyItem);
         }
     }
 }
