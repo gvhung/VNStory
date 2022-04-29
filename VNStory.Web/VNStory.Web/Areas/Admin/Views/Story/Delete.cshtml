@@ -1,0 +1,32 @@
+﻿@model  VNStory.Web.Models.Story
+@{
+    ViewBag.Title = "Story";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <h3>Bạn muốn xóa truyện này không?</h3>
+    <hr />
+
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.Name)</label>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.Name)</label>
+    </div>
+
+    <div class="form-actions no-color">
+
+        @using (Html.BeginForm("Delete", "Story", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Xóa truyện" class="btn btn-danger" />
+
+            @Html.ActionLink("Back to List", "Index", "Story", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" });
+        }
+
+    </div>
+
+</div>

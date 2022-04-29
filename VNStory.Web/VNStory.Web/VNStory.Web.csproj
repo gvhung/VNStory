@@ -495,6 +495,7 @@
     <Compile Include="Areas\Admin\Models\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UsersViewModels.cs" />
+    <Compile Include="Commons\Utils.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataContexts\ApplicationDbContext.cs" />
@@ -538,6 +539,10 @@
     <Content Include="Areas\Admin\Views\Category\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Story\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Story\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Story\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Story\Edit.cshtml" />
     <None Include="packages.config" />
     <Content Include="Resources\jquery\jquery-3.4.1.min.map" />
     <Content Include="Resources\jquery\jquery-3.5.0.slim.min.map" />
