@@ -92,16 +92,60 @@ namespace VNStory.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Name,Index,ImagePath")] Category categoryItem)
+        public ActionResult Edit([Bind(Include = "Id,Name,Index,ImagePath,RemoveImage")] Category categoryItem)
         {
             if (ModelState.IsValid)
             {
+                //string path = HttpContext.Server.MapPath("~/Uploads/");
+                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
+                if (categoryItem.RemoveImage == true)
+                {
+                    if (string.IsNullOrEmpty(categoryItem.ImagePath) == false)
+                    {
+                        if (System.IO.File.Exists(Path.Combine(path, categoryItem.ImagePath)))
+                        {
+                            System.IO.File.Delete(Path.Combine(path, categoryItem.ImagePath));
+                        }
+                        categoryItem.ImagePath = string.Empty;
+                    }
+
+                }
+                else
+                {
+
+                    if (HttpContext.Request.Files.Count > 0)
+                    {
+
+                        HttpPostedFileBase postedFile = HttpContext.Request.Files[0];
+
+                        string fileName = Path.GetFileName(postedFile.FileName);
+
+                        postedFile.SaveAs(Path.Combine(path, fileName));
+
+                        categoryItem.ImagePath = fileName;
+
+                    }
+                }
+                categoryItem.Slug = Globals.CreateSlug(categoryItem.Name);
+
                 db.Entry(categoryItem).State = EntityState.Modified;
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
+
             }
-            return View(categoryItem);
+            return RedirectToAction("Index");
         }
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(categoryItem).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(categoryItem);
+        //}
 
         public ActionResult Delete(int id)
         {
@@ -118,6 +162,14 @@ namespace VNStory.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
+                if (string.IsNullOrEmpty(categoryItem.ImagePath) == false)
+                {
+                    if (System.IO.File.Exists(Path.Combine(path, categoryItem.ImagePath)))
+                    {
+                        System.IO.File.Delete(Path.Combine(path, categoryItem.ImagePath));
+                    }
+                }
                 var myCategoryItem = db.Categories.Find(categoryItem.Id);
                 db.Categories.Remove(myCategoryItem);
                 db.SaveChanges();
@@ -125,12 +177,5 @@ namespace VNStory.Web.Areas.Admin.Controllers
             }
             return View(categoryItem);
         }
-
-
-
-
-
-
-
     }
 }

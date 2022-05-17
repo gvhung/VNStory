@@ -35,5 +35,11 @@ namespace VNStory.Web.Models
         [Display(Name = "Ảnh đại diện")]
         public string ImagePath { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Thứ tự hiển thị
+        /// </summary>
+        [Display(Name = "Xóa ảnh hiển thị")]
+        public bool RemoveImage { get; set; } = false;
+
     }
 }

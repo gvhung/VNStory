@@ -33,6 +33,11 @@
         </div>
 
         <div class="mb-3">
+            @Html.CheckBoxFor(model => model.RemoveImage, htmlAttributes: new { @checked = "checked", @class = "form-check-input" })
+            @Html.LabelFor(model => model.RemoveImage, htmlAttributes: new { @class = "form-check-label" })
+        </div>
+
+        <div class="mb-3">
             <input type="submit" value="Cập nhật" class="btn btn-primary" />
             @Html.ActionLink("Trở lại", "Index", "Category", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" })
         </div>
