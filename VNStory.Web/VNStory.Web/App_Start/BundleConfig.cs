@@ -34,6 +34,7 @@ namespace VNStory.Web
                 "~/Resources/tablesorter-2.31.3/js/jquery.tablesorter.widgets."+minify+"js",
                 "~/Resources/jquery-blockUI-2.70/jquery.blockUI."+minify+"js",
                 "~/Resources/jquery-dateFormat/jquery-dateFormat."+minify+"js",
+                "~/Resources/jbox-1.3.3/jBox.all."+minify+"js",
                 "~/Resources/WebApplication."+minify+"js"
             };
 
@@ -42,7 +43,8 @@ namespace VNStory.Web
                 "~/Resources/jquery-ui-1.12.1/jquery-ui."+minify+"css",
                 "~/Resources/bootstrap-5.1.3/css/bootstrap."+minify+"css",
                 "~/Resources/bootstrap-icons-1.8.1/bootstrap-icons."+minify+"css",
-                "~/Resources/tablesorter-2.31.3/css/theme.blue."+minify+"css"
+                "~/Resources/tablesorter-2.31.3/css/theme.blue."+minify+"css",
+                "~/Resources/jbox-1.3.3/jBox.all."+minify+"css",
             };
 
             //bundles.Add(new ScriptBundle("~/Resources/script").Include(javascriptItems));

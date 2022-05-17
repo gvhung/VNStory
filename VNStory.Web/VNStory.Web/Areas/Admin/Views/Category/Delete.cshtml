@@ -10,23 +10,54 @@
     <hr />
 
     <div class="mb-3">
-        <label class="form-label">@Html.DisplayNameFor(model => model.Name)</label>
+        <label class="form-label">@Html.DisplayNameFor(model => model.Name): </label>
     </div>
 
     <div class="mb-3">
         <label class="form-label">@Html.DisplayFor(model => model.Name)</label>
     </div>
 
+    @if (Model.ImagePath != null)
+    {
+        <div class="mb-3">
+            <img src="@Model.ImageUrl" class="img-thumbnail" alt="@Model.Name" width="350" />
+        </div>
+    }
+
     <div class="form-actions no-color">
 
         @using (Html.BeginForm("Delete", "Category", FormMethod.Post, new { role = "form" }))
         {
             @Html.AntiForgeryToken()
-            <input type="submit" value="Xóa thể loại này" class="btn btn-danger" />
+            @*<input id="btDeleteCategory" type="submit" value="Xóa thể loại này" class="btn btn-danger" />*@
+            
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#dlgDeleteConfirm">
+                Xóa thể loại này
+            </button>
+            
+            <div class="modal fade" id="dlgDeleteConfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">VNStory</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Bạn muốn xóa nội dung này phải không?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             @Html.ActionLink("Back to List", "Index", "Category", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" });
         }
 
     </div>
+
+
 
 </div>

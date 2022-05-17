@@ -17,6 +17,40 @@ $(document).ready(function () {
         })
     });
 
+    //Khởi tạo Tooltip
+    new jBox('Tooltip', {
+        attach: $("[role=tooltip]"),
+        trigger: 'mouseenter',
+        getTitle: 'data-jbox-title',
+        getContent: 'data-jbox-content'
+    });
+
+    //$('.tooltip').jBox('Tooltip', {
+    //    trigger: 'mouseenter',
+    //    adjustPosition: true,
+    //    adjustTracker: true
+    //});
+
+    //$('[data-toggle="tooltip"]').tooltip({
+    //    animated: 'fade',
+    //    placement: 'top',
+    //    html: true
+    //});
+
+    //$('a[data-toggle="tooltip"]').tooltip({
+    //    animated: 'fade',
+    //    placement: 'top',
+    //    html: true
+    //});
+
+    //$('input#btDeleteCategory').click(function (e)
+    //{        
+    //    return confirm('Bạn muốn xóa nội dung này phải không?');
+    //    //return false;
+    //});
+
+
+
     //$("div#Nhap_Diem_ActionButton").hide();
     //$("div#Xep_Loai_ActionButton").hide();
 

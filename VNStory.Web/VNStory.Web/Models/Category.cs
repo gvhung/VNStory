@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using VNStory.Web.Commons;
 
 namespace VNStory.Web.Models
 {
@@ -36,8 +38,25 @@ namespace VNStory.Web.Models
         public string ImagePath { get; set; } = string.Empty;
 
         /// <summary>
+        /// Url của hình ảnh
+        /// </summary>
+        public string ImageUrl 
+        { 
+            get 
+            {
+                string valReturn = string.Empty;
+                if (string.IsNullOrEmpty(ImagePath) == false)
+                {
+                    valReturn = Globals.ApplicationPath + "/Uploads/Images/" + ImagePath;
+                }
+                return valReturn;
+            }
+        }
+
+        /// <summary>
         /// Thứ tự hiển thị
         /// </summary>
+        [NotMapped]
         [Display(Name = "Xóa ảnh hiển thị")]
         public bool RemoveImage { get; set; } = false;
 
