@@ -40,28 +40,30 @@ namespace VNStory.Web.Areas.Admin.Controllers
             //Kiểm tra lỗi, nếu ok thì tiếp tục thực hiện, không thì chuyển về trang danh sách các thể loại
             if (ModelState.IsValid)
             {
-                //Tạo thư mục
-                //string path = HttpContext.Server.MapPath("~/Uploads/");
-                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
                 //Kiểm tra xem có file tải lên server hay không
                 if (HttpContext.Request.Files.Count > 0)
                 {
                     //Lấy file từ client gửi lên
                     HttpPostedFileBase postedFile = HttpContext.Request.Files[0];
 
-                    //Lấy tên file
-                    string fileName = Path.GetFileName(postedFile.FileName);
+                    if (postedFile != null && postedFile.ContentLength > 0)
+                    {
+                        //Tạo thư mục
+                        string path = Path.Combine(Globals.UploadFolderMapPath, Utils.FolderCategoryImage);
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
 
-                    //Lưu ở máy chủ (Server)
-                    postedFile.SaveAs(Path.Combine(path, fileName));
+                        //Lấy tên file
+                        string fileName = Path.GetFileName(postedFile.FileName);
 
-                    //Gán tên file vào đối tượng category
-                    categoryItem.ImagePath = fileName;
+                        //Lưu ở máy chủ (Server)
+                        postedFile.SaveAs(Path.Combine(path, fileName));
+
+                        //Gán tên file vào đối tượng category
+                        categoryItem.ImagePath = fileName;
+                    }
                 }
 
                 //Tạo chuỗi tiếng việt không dấu từ tên thê loại
@@ -96,8 +98,7 @@ namespace VNStory.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //string path = HttpContext.Server.MapPath("~/Uploads/");
-                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
+                string path = Path.Combine(Globals.UploadFolderMapPath, Utils.FolderCategoryImage);
                 if (categoryItem.RemoveImage == true)
                 {
                     if (string.IsNullOrEmpty(categoryItem.ImagePath) == false)
@@ -115,15 +116,15 @@ namespace VNStory.Web.Areas.Admin.Controllers
 
                     if (HttpContext.Request.Files.Count > 0)
                     {
-
                         HttpPostedFileBase postedFile = HttpContext.Request.Files[0];
+                        if (postedFile != null && postedFile.ContentLength > 0)
+                        {
+                            string fileName = Path.GetFileName(postedFile.FileName);
 
-                        string fileName = Path.GetFileName(postedFile.FileName);
+                            postedFile.SaveAs(Path.Combine(path, fileName));
 
-                        postedFile.SaveAs(Path.Combine(path, fileName));
-
-                        categoryItem.ImagePath = fileName;
-
+                            categoryItem.ImagePath = fileName;
+                        }
                     }
                 }
                 categoryItem.Slug = Globals.CreateSlug(categoryItem.Name);
@@ -153,9 +154,9 @@ namespace VNStory.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
                 if (string.IsNullOrEmpty(categoryItem.ImagePath) == false)
                 {
+                    string path = Path.Combine(Globals.UploadFolderMapPath, Utils.FolderCategoryImage);
                     if (System.IO.File.Exists(Path.Combine(path, categoryItem.ImagePath)))
                     {
                         System.IO.File.Delete(Path.Combine(path, categoryItem.ImagePath));

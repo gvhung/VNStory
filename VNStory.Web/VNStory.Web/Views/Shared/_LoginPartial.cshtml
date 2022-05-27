@@ -25,11 +25,7 @@
             @if (User.IsInRole("Administrators") == true)
             {
                 <li><hr class="dropdown-divider"></li>
-                <!--
-                <li>
-                    @Html.ActionLink("External logins", "ManageLogins", "Account", routeValues: new { Area = "" }, htmlAttributes: new { @class = "dropdown-item" })
-                </li>
-                    -->
+
                 <li>
                     @Html.ActionLink("Thành viên", "Index", "Users", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })
                 </li>
@@ -38,6 +34,9 @@
                 </li>
                 <li>
                     @Html.ActionLink("Thể loại truyện", "Index", "Category", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })
+                </li>
+                <li>
+                    @Html.ActionLink("Tác giả truyện", "Index", "Author", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })
                 </li>
                 <li>
                     @Html.ActionLink("Danh sách truyện", "Index", "Story", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "dropdown-item" })

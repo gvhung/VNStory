@@ -38,7 +38,7 @@ namespace VNStory.Web.Models
         /// </summary>
         [DataType(DataType.Upload)]
         [Display(Name = "Ảnh đại diện")]
-        public string ImagePaths { get; set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
 
         /// <summary>
         /// Url của hình ảnh
@@ -48,9 +48,9 @@ namespace VNStory.Web.Models
             get
             {
                 string valReturn = string.Empty;
-                if (string.IsNullOrEmpty(ImagePaths) == false)
+                if (string.IsNullOrEmpty(ImagePath) == false)
                 {
-                    valReturn = Globals.ApplicationPath + "/Uploads/Images/" + ImagePaths;
+                    valReturn = Uri.EscapeDataString(Globals.ApplicationPath + "/Uploads/" + Utils.FolderAuthorImage);
                 }
                 return valReturn;
             }

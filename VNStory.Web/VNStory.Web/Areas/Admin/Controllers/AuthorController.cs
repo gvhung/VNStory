@@ -39,22 +39,24 @@ namespace VNStory.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
                 if (HttpContext.Request.Files.Count > 0)
-                {
+                {                    
                     HttpPostedFileBase postedFile = HttpContext.Request.Files[0];
 
-                    string fileName = Path.GetFileName(postedFile.FileName);
+                    if (postedFile != null && postedFile.ContentLength > 0)
+                    {
+                        string path = Path.Combine(Globals.UploadFolderMapPath, Utils.FolderAuthorImage);
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
 
-                    postedFile.SaveAs(Path.Combine(path, fileName));
+                        string fileName = Path.GetFileName(postedFile.FileName);
 
-                    authorItem.ImagePaths = fileName;
+                        postedFile.SaveAs(Path.Combine(path, fileName));
+
+                        authorItem.ImagePath = fileName;
+                    }                        
                 }
 
                 authorItem.Slug = Globals.CreateSlug(authorItem.Name);
@@ -84,16 +86,17 @@ namespace VNStory.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
+                string path = Path.Combine(Globals.UploadFolderMapPath, Utils.FolderAuthorImage);
+
                 if (authorItem.RemoveImage == true)
                 {
-                    if (string.IsNullOrEmpty(authorItem.ImagePaths) == false)
+                    if (string.IsNullOrEmpty(authorItem.ImagePath) == false)
                     {
-                        if (System.IO.File.Exists(Path.Combine(path, authorItem.ImagePaths)))
+                        if (System.IO.File.Exists(Path.Combine(path, authorItem.ImagePath)))
                         {
-                            System.IO.File.Delete(Path.Combine(path, authorItem.ImagePaths));
+                            System.IO.File.Delete(Path.Combine(path, authorItem.ImagePath));
                         }
-                        authorItem.ImagePaths = string.Empty;
+                        authorItem.ImagePath = string.Empty;
                     }
 
                 }
@@ -102,15 +105,17 @@ namespace VNStory.Web.Areas.Admin.Controllers
 
                     if (HttpContext.Request.Files.Count > 0)
                     {
-
                         HttpPostedFileBase postedFile = HttpContext.Request.Files[0];
 
-                        string fileName = Path.GetFileName(postedFile.FileName);
+                        if (postedFile != null && postedFile.ContentLength > 0)
+                        {
+                            string fileName = Path.GetFileName(postedFile.FileName);
 
-                        postedFile.SaveAs(Path.Combine(path, fileName));
+                            postedFile.SaveAs(Path.Combine(path, fileName));
 
-                        authorItem.ImagePaths = fileName;
+                            authorItem.ImagePath = fileName;
 
+                        }
                     }
                 }
                 authorItem.Slug = Globals.CreateSlug(authorItem.Name);
@@ -140,13 +145,14 @@ namespace VNStory.Web.Areas.Admin.Controllers
         public ActionResult Delete(Author authorItem)
         {
             if (ModelState.IsValid)
-            {
-                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
-                if (string.IsNullOrEmpty(authorItem.ImagePaths) == false)
+            {                
+                if (string.IsNullOrEmpty(authorItem.ImagePath) == false)
                 {
-                    if (System.IO.File.Exists(Path.Combine(path, authorItem.ImagePaths)))
+                    string path = Path.Combine(Globals.UploadFolderMapPath, Utils.FolderAuthorImage);
+
+                    if (System.IO.File.Exists(Path.Combine(path, authorItem.ImagePath)))
                     {
-                        System.IO.File.Delete(Path.Combine(path, authorItem.ImagePaths));
+                        System.IO.File.Delete(Path.Combine(path, authorItem.ImagePath));
                     }
                 }
                 var myAuthorItem = db.Authors.Find(authorItem.Id);

@@ -47,7 +47,6 @@ namespace VNStory.Web.Models
         [Display(Name = "Ảnh đại diện")]
         public string ImagePath { get; set; } = string.Empty;
 
-
         /// <summary>
         /// Thứ tự hiển thị
         /// </summary>
@@ -77,7 +76,6 @@ namespace VNStory.Web.Models
         [Display(Name = "Xóa ảnh hiển thị")]
         public bool RemoveImage { get; set; } = false;
 
-
         /// <summary>
         /// Nguồn truyện
         /// </summary>
@@ -90,15 +88,22 @@ namespace VNStory.Web.Models
         [Display(Name = "Mô tả")]
         public string Description { get; set; } = string.Empty;
 
-        ///// <summary>
-        ///// Mã tác giả
-        ///// </summary>
-        //public int AuthorId { get; set; } = 0;
+        /// <summary>
+        /// Mã tác giả
+        /// </summary>
+        [Display(Name = "Tác giả")]
+        public int AuthorId { get; set; } = 0;
 
-        ///// <summary>
-        ///// Đối tượng Tác Giả
-        ///// </summary>
-        //public virtual Author Author { get; set; }
+        /// <summary>
+        /// Đối tượng Tác Giả
+        /// </summary>
+        public virtual Author Author { get; set; }
+
+        /// <summary>
+        /// Nhiều chương
+        /// </summary>
+        [Display(Name = "Truyện này gồm có nhiều chương")]
+        public bool IsMultiChapter { get; set; } = false;
 
         ///// <summary>
         ///// Danh sách các Chương

@@ -93,17 +93,13 @@ namespace VNStory.Web.Areas.Admin.Controllers
             //ViewBag.ListTrangThai = listTrangThai;
             ViewBag.ListTrangThai = new SelectList(listTrangThai, "Value", "Text");
 
-
-
-            //List<SelectListItem> authorlist = new List<SelectListItem>();
-            //authorlist.Add(new SelectListItem { Text = "Nguyễn Văn A", Value = "0" });
-            //authorlist.Add(new SelectListItem { Text = "Nguyễn Văn B", Value = "1" });
-            //authorlist.Add(new SelectListItem { Text = "Nguyễn Văn C", Value = "2", Selected = true });
-            //authorlist.Add(new SelectListItem { Text = "Nguyễn Văn D", Value = "3" });                       
-            //ViewBag.Authorlist = new SelectList(authorlist, "Value", "Text");
-
-
-
+            //Lấy danh sách tác giả
+            List<SelectListItem> authorlist = new List<SelectListItem>();
+            foreach (Author item in db.Authors.ToList())
+            {
+                authorlist.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+            ViewBag.Authorlist = new SelectList(authorlist, "Value", "Text");
 
             return View();
         }
@@ -112,18 +108,17 @@ namespace VNStory.Web.Areas.Admin.Controllers
         public ActionResult Create(Story storyItem)
         {
             if (ModelState.IsValid)
-            {
-                //Tạo thư mục
-                //string path = HttpContext.Server.MapPath("~/Uploads/");
-                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
+            {                
                 //Kiểm tra xem có file tải lên server hay không
                 if (HttpContext.Request.Files.Count > 0)
                 {
+                    //Tạo thư mục
+                    string path = Path.Combine(Globals.UploadFolderMapPath, Utils.FolderStoryImage);
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
                     //Lấy file từ client gửi lên
                     HttpPostedFileBase postedFile = HttpContext.Request.Files[0];
 
@@ -230,6 +225,18 @@ namespace VNStory.Web.Areas.Admin.Controllers
 
             #endregion
 
+            #region Danh sách tác giả
+
+            //Lấy danh sách tác giả
+            List<SelectListItem> authorlist = new List<SelectListItem>();
+            foreach (Author item in db.Authors.ToList())
+            {
+                authorlist.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+            ViewBag.Authorlist = new SelectList(authorlist, "Value", "Text");
+
+            #endregion
+
             return View(storyItem);
         }
 
@@ -243,39 +250,37 @@ namespace VNStory.Web.Areas.Admin.Controllers
         {
             //Kiểm tra dữ liệu trước khi lưu vào cơ sở dữ liệu
             if (ModelState.IsValid)//Nếu hợp lệ
-
             {
+                string path = Path.Combine(Globals.UploadFolderMapPath, Utils.FolderStoryImage);
+
+                if (Story.RemoveImage == true)
                 {
-                    string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
-                    if (Story.RemoveImage == true)
+                    if (string.IsNullOrEmpty(Story.ImagePath) == false)
                     {
-                        if (string.IsNullOrEmpty(Story.ImagePath) == false)
+                        if (System.IO.File.Exists(Path.Combine(path, Story.ImagePath)))
                         {
-                            if (System.IO.File.Exists(Path.Combine(path, Story.ImagePath)))
-                            {
-                                System.IO.File.Delete(Path.Combine(path, Story.ImagePath));
-                            }
-                            Story.ImagePath = string.Empty;
+                            System.IO.File.Delete(Path.Combine(path, Story.ImagePath));
                         }
-
+                        Story.ImagePath = string.Empty;
                     }
-                    else
+
+                }
+                else
+                {
+                    if (HttpContext.Request.Files.Count > 0)
                     {
 
-                        if (HttpContext.Request.Files.Count > 0)
-                        {
+                        HttpPostedFileBase postedFile = HttpContext.Request.Files[0];
 
-                            HttpPostedFileBase postedFile = HttpContext.Request.Files[0];
+                        string fileName = Path.GetFileName(postedFile.FileName);
 
-                            string fileName = Path.GetFileName(postedFile.FileName);
+                        postedFile.SaveAs(Path.Combine(path, fileName));
 
-                            postedFile.SaveAs(Path.Combine(path, fileName));
+                        Story.ImagePath = fileName;
 
-                            Story.ImagePath = fileName;
-
-                        }
                     }
                 }
+
                 Story.Slug = Globals.CreateSlug(Story.Name);
 
                 db.Entry(Story).State = EntityState.Modified;
@@ -285,20 +290,7 @@ namespace VNStory.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            {
-                //Truyền vào đối tượng truyện cho db context
-                db.Entry(Story).State = EntityState.Modified;
-
-                //Lưu vào cơ sở dữ liệu
-                db.SaveChanges();
-
-                //Chuyển về trang danh sách truyện
-                return RedirectToAction("Index");
-            }
-
-            
-
-            //Nếu có lỗi (không hợp lệ) khi kiểm tra dữ liệu trước khi lưu thì vẫn ở trang hiện tại (trang chỉnh sửa truyện)           
+            return RedirectToAction("Index");            
         }
 
         public ActionResult Delete(int id)
@@ -316,10 +308,11 @@ namespace VNStory.Web.Areas.Admin.Controllers
         public ActionResult Delete(Story storyItem)
         {
             if (ModelState.IsValid)
-            {
-                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
+            {                
                 if (string.IsNullOrEmpty(storyItem.ImagePath) == false)
                 {
+                    string path = Path.Combine(Globals.UploadFolderMapPath, Utils.FolderStoryImage);
+
                     if (System.IO.File.Exists(Path.Combine(path, storyItem.ImagePath)))
                     {
                         System.IO.File.Delete(Path.Combine(path, storyItem.ImagePath));

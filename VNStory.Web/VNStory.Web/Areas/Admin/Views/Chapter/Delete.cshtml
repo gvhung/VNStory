@@ -1,0 +1,38 @@
+﻿@model  Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+    ViewBag.Title = "Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <h3>Bạn muốn xóa nhóm người dùng này phải không?</h3>
+    <hr />
+    
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.Name)</label>
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.Name)</label>
+    </div>
+
+    <div class="form-actions no-color">
+
+        @using (Html.BeginForm("Delete", "Roles", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            if (Model?.Name != "Administrators")
+            {
+                if (Model?.Name != "Users")
+                {
+                    <input type="submit" value="Xóa nhóm này" class="btn btn-danger" />
+                }
+            }
+
+            @Html.ActionLink("Back to List", "Index", "Roles", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" });
+        }
+
+    </div>
+
+</div>

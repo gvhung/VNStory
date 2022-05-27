@@ -523,6 +523,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChapterController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ToolController.cs" />
     <Compile Include="Areas\Admin\Controllers\StoryController.cs" />
@@ -585,6 +586,11 @@
     <Content Include="Areas\Admin\Views\Author\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Author\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Author\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Chapter\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Chapter\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Chapter\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Chapter\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Chapter\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Resources\jquery\jquery-3.4.1.min.map" />
     <Content Include="Resources\jquery\jquery-3.5.0.slim.min.map" />

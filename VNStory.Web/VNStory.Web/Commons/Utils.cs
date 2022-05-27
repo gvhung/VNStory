@@ -15,4 +15,12 @@ namespace VNStory.Web.Commons
         Docnhieu = 2,
         Hoanthanh = 3
     }
+
+    public class Utils 
+    {
+        public static string FolderCategoryImage = "Category-Images";
+        public static string FolderAuthorImage = "Author-Images";
+        public static string FolderStoryImage = "Story-Images";
+    }
+
 }
