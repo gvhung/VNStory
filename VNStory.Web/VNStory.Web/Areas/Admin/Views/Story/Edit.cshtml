@@ -24,9 +24,21 @@
             @Html.DropDownListFor(model => model.Status, ViewBag.ListTrangThai as SelectList, htmlAttributes: new { @class = "form-select" })
         </div>
         <div class="mb-3">
-            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "form-label" })
-            @Html.TextBoxFor(model => model.Image, htmlAttributes: new { type = "file", @class = "form-control" })
+            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.ImagePath, htmlAttributes: new { type = "file", name = "file", @class = "form-control" })
         </div>
+
+        if (Model.ImagePath != null)
+        {
+            <div class="mb-3">
+                @Html.CheckBoxFor(model => model.RemoveImage, htmlAttributes: new { @checked = "checked", @class = "form-check-input" })
+                @Html.LabelFor(model => model.RemoveImage, htmlAttributes: new { @class = "form-check-label" })
+            </div>
+
+            <div class="mb-3">
+                <img src="@Model.ImageUrl" class="img-thumbnail" alt="@Model.Name" width="350" />
+            </div>
+        }
 
         <div class="mb-3">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-label" })

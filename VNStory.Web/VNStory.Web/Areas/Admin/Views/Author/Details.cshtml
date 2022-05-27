@@ -1,0 +1,23 @@
+﻿@model  VNStory.Web.Models.Author
+@{
+    ViewBag.Title = "Tác Giả";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h4>Chi tiết thể loại</h4>
+    <hr />
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.Name):</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.Name)</label>
+    </div>
+    <div class="mb-3">
+        <img src="@Model.ImageUrl" class="img-thumbnail" alt="@Model.Name" width="350" />
+    </div>
+    <div class="col-12">
+        @Html.ActionLink("Chỉnh sửa", "Edit", "Author", routeValues: new { Area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("Trở lại", "Index", "Author", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" })
+    </div>
+</div>

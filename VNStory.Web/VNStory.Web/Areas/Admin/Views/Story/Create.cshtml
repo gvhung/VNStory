@@ -30,8 +30,8 @@
         </div>*@
 
         <div class="mb-3">
-            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "form-label" })
-            @Html.TextBoxFor(model => model.Image, htmlAttributes: new { type = "file", @class = "form-control", placeholder = "Ảnh mô tả", })
+            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.ImagePath, htmlAttributes: new { type = "file", name = "file", @class = "form-control" })
         </div>
 
         <div class="mb-3">

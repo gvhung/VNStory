@@ -5,62 +5,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>ApplicationUser</h4>
+<div class="container-fluid">
+    <h4>Chi tiết thể loại</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.Name):</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.Name)</label>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.Source):</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.Source)</label>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Source)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Source)
-        </dd>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.Description):</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.Description)</label>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.Views):</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.Views)</label>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Views)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Views)
-        </dd>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.Status):</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.Status)</label>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
+    <div class="mb-3">
+        <img src="@Model.ImageUrl" class="img-thumbnail" alt="@Model.Name" width="350" />
+    </div>
+    <div class="col-12">
+        @Html.ActionLink("Chỉnh sửa", "Edit", "Category", routeValues: new { Area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("Trở lại", "Index", "Category", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" })
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

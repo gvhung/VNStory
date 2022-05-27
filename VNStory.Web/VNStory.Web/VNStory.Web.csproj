@@ -527,6 +527,7 @@
     <Compile Include="Areas\Admin\Controllers\ToolController.cs" />
     <Compile Include="Areas\Admin\Controllers\StoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuthorController.cs" />
     <Compile Include="Areas\Admin\Models\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UsersViewModels.cs" />
@@ -579,6 +580,11 @@
     <Content Include="Areas\Admin\Views\Story\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Story\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Story\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Author\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Author\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Author\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Author\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Author\Edit.cshtml" />
     <None Include="packages.config" />
     <Content Include="Resources\jquery\jquery-3.4.1.min.map" />
     <Content Include="Resources\jquery\jquery-3.5.0.slim.min.map" />

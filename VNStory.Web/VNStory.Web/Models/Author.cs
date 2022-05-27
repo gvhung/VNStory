@@ -1,22 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using VNStory.Web.Commons;
 
 namespace VNStory.Web.Models
 {
+
     /// <summary>
-    /// Tác giả
+    /// Thể loại truyện
     /// </summary>
     public class Author : BaseEntity
     {
         /// <summary>
-        /// Tên Tác Giả
+        /// Tên thể loại
         /// </summary>
-        public string Name { get; set; }
+        [Display(Name = "Tên tác giả")]
+        public string Name { get; set; } = string.Empty;
+
+        [Display(Name = "Tiểu sử tác giả")]
+        public string Biography { get; set; } = string.Empty;
 
         /// <summary>
-        /// Danh sách truyện
+        /// Tên tiếng việt không dấu (hỗ trợ Url thân thiện)
         /// </summary>
-        public virtual ICollection<Story> Stories { get; set; }
+        public string Slug { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Thứ tự hiển thị
+        /// </summary>
+        [Display(Name = "Thứ tự hiển thị")]
+        public int Index { get; set; } = 0;
+
+        /// <summary>
+        /// Đường dẫn ảnh đại diện
+        /// </summary>
+        [DataType(DataType.Upload)]
+        [Display(Name = "Ảnh đại diện")]
+        public string ImagePaths { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Url của hình ảnh
+        /// </summary>
+        public string ImageUrl
+        {
+            get
+            {
+                string valReturn = string.Empty;
+                if (string.IsNullOrEmpty(ImagePaths) == false)
+                {
+                    valReturn = Globals.ApplicationPath + "/Uploads/Images/" + ImagePaths;
+                }
+                return valReturn;
+            }
+        }
+
+        /// <summary>
+        /// Thứ tự hiển thị
+        /// </summary>
+        [NotMapped]
+        [Display(Name = "Xóa ảnh hiển thị")]
+        public bool RemoveImage { get; set; } = false;
+
     }
 }
+

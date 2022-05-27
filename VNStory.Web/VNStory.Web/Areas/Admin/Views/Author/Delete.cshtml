@@ -1,12 +1,12 @@
-﻿@model  VNStory.Web.Models.Story
+﻿@model  VNStory.Web.Models.Author
 @{
-    ViewBag.Title = "Story";
+    ViewBag.Title = "Tác Giả";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container-fluid">
 
-    <h3>Bạn muốn xóa truyện này không?</h3>
+    <h3>Bạn muốn xóa thể loại này phải không?</h3>
     <hr />
 
     <div class="mb-3">
@@ -17,7 +17,7 @@
         <label class="form-label">@Html.DisplayFor(model => model.Name)</label>
     </div>
 
-    @if (Model.ImagePath != null)
+    @if (Model.ImagePaths != null)
     {
         <div class="mb-3">
             <img src="@Model.ImageUrl" class="img-thumbnail" alt="@Model.Name" width="350" />
@@ -26,15 +26,15 @@
 
     <div class="form-actions no-color">
 
-        @using (Html.BeginForm("Delete", "Story", FormMethod.Post, new { role = "form" }))
+        @using (Html.BeginForm("Delete", "Author", FormMethod.Post, new { role = "form" }))
         {
             @Html.AntiForgeryToken()
             @*<input id="btDeleteCategory" type="submit" value="Xóa thể loại này" class="btn btn-danger" />*@
-
+            
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#dlgDeleteConfirm">
                 Xóa thể loại này
             </button>
-
+            
             <div class="modal fade" id="dlgDeleteConfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -53,9 +53,11 @@
                 </div>
             </div>
 
-            @Html.ActionLink("Back to List", "Index", "Story", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" });
+            @Html.ActionLink("Back to List", "Index", "Author", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" });
         }
 
     </div>
+
+
 
 </div>

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using VNStory.Web.Commons;
 using VNStory.Web.DataContexts;
@@ -111,13 +113,48 @@ namespace VNStory.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Tạo thư mục
+                //string path = HttpContext.Server.MapPath("~/Uploads/");
+                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                //Kiểm tra xem có file tải lên server hay không
+                if (HttpContext.Request.Files.Count > 0)
+                {
+                    //Lấy file từ client gửi lên
+                    HttpPostedFileBase postedFile = HttpContext.Request.Files[0];
+
+                    //Lấy tên file
+                    string fileName = Path.GetFileName(postedFile.FileName);
+
+                    //Lưu ở máy chủ (Server)
+                    postedFile.SaveAs(Path.Combine(path, fileName));
+
+                    //Gán tên file vào đối tượng category
+                    storyItem.ImagePath = fileName;
+                }
+
+                //Tạo chuỗi tiếng việt không dấu từ tên thê loại
+                storyItem.Slug = Globals.CreateSlug(storyItem.Name);
+
+                //Thêm vào danh sách thể loại
                 db.Stories.Add(storyItem);
+
+                //Lưu vào cơ sở dữ liệu
                 db.SaveChanges();
+
+                //Chuyển vê trang danh sách thể loạih
                 return RedirectToAction("Index");
             }
+
+            //Chuyển vê trang danh sách thể loạih
             return RedirectToAction("Index");
         }
 
+       
         public ActionResult Edit(int id)
         {
             //Lấy bản ghi có Id = giá trị của param (biến, tham số) Id
@@ -202,10 +239,52 @@ namespace VNStory.Web.Areas.Admin.Controllers
         /// <param name="Story"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Name,Status,Views,Image,Source,Description")] Story Story)
+        public ActionResult Edit([Bind(Include = "Id,Name,Status,Views,ImagePath,RemoveImage,Source,Description")] Story Story)
         {
             //Kiểm tra dữ liệu trước khi lưu vào cơ sở dữ liệu
             if (ModelState.IsValid)//Nếu hợp lệ
+
+            {
+                {
+                    string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
+                    if (Story.RemoveImage == true)
+                    {
+                        if (string.IsNullOrEmpty(Story.ImagePath) == false)
+                        {
+                            if (System.IO.File.Exists(Path.Combine(path, Story.ImagePath)))
+                            {
+                                System.IO.File.Delete(Path.Combine(path, Story.ImagePath));
+                            }
+                            Story.ImagePath = string.Empty;
+                        }
+
+                    }
+                    else
+                    {
+
+                        if (HttpContext.Request.Files.Count > 0)
+                        {
+
+                            HttpPostedFileBase postedFile = HttpContext.Request.Files[0];
+
+                            string fileName = Path.GetFileName(postedFile.FileName);
+
+                            postedFile.SaveAs(Path.Combine(path, fileName));
+
+                            Story.ImagePath = fileName;
+
+                        }
+                    }
+                }
+                Story.Slug = Globals.CreateSlug(Story.Name);
+
+                db.Entry(Story).State = EntityState.Modified;
+
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
             {
                 //Truyền vào đối tượng truyện cho db context
                 db.Entry(Story).State = EntityState.Modified;
@@ -217,8 +296,9 @@ namespace VNStory.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            //Nếu có lỗi (không hợp lệ) khi kiểm tra dữ liệu trước khi lưu thì vẫn ở trang hiện tại (trang chỉnh sửa truyện)            
-            return View(Story);
+            
+
+            //Nếu có lỗi (không hợp lệ) khi kiểm tra dữ liệu trước khi lưu thì vẫn ở trang hiện tại (trang chỉnh sửa truyện)           
         }
 
         public ActionResult Delete(int id)
@@ -228,7 +308,8 @@ namespace VNStory.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View();
+
+            return View(role);
         }
 
         [HttpPost]
@@ -236,6 +317,14 @@ namespace VNStory.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                string path = Path.Combine(Globals.UploadFolderMapPath, "Images");
+                if (string.IsNullOrEmpty(storyItem.ImagePath) == false)
+                {
+                    if (System.IO.File.Exists(Path.Combine(path, storyItem.ImagePath)))
+                    {
+                        System.IO.File.Delete(Path.Combine(path, storyItem.ImagePath));
+                    }
+                }
                 var myStoryItem = db.Stories.Find(storyItem.Id);
                 db.Stories.Remove(myStoryItem);
                 db.SaveChanges();
@@ -245,3 +334,4 @@ namespace VNStory.Web.Areas.Admin.Controllers
         }
     }
 }
+            

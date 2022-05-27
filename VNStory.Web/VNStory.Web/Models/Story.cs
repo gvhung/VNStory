@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using VNStory.Web.Commons;
 
 namespace VNStory.Web.Models
 {
@@ -32,7 +34,7 @@ namespace VNStory.Web.Models
         /// </summary>
         [Display(Name = "Lượt xem")]
         public int Views { get; set; } = 0;
-        
+
         /// <summary>
         /// Tổng số Chương
         /// </summary>
@@ -41,8 +43,40 @@ namespace VNStory.Web.Models
         /// <summary>
         /// Hình ảnh đại diện
         /// </summary>
+        [DataType(DataType.Upload)]
         [Display(Name = "Ảnh đại diện")]
-        public string Image { get; set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
+
+
+        /// <summary>
+        /// Thứ tự hiển thị
+        /// </summary>
+        [Display(Name = "Thứ tự hiển thị")]
+        public int Index { get; set; } = 0;
+
+        /// <summary>
+        /// Url của hình ảnh
+        /// </summary>
+        public string ImageUrl
+        {
+            get
+            {
+                string valReturn = string.Empty;
+                if (string.IsNullOrEmpty(ImagePath) == false)
+                {
+                    valReturn = Globals.ApplicationPath + "/Uploads/Images/" + ImagePath;
+                }
+                return valReturn;
+            }
+        }
+
+        /// <summary>
+        /// Thứ tự hiển thị
+        /// </summary>
+        [NotMapped]
+        [Display(Name = "Xóa ảnh hiển thị")]
+        public bool RemoveImage { get; set; } = false;
+
 
         /// <summary>
         /// Nguồn truyện
@@ -65,12 +99,12 @@ namespace VNStory.Web.Models
         ///// Đối tượng Tác Giả
         ///// </summary>
         //public virtual Author Author { get; set; }
-        
+
         ///// <summary>
         ///// Danh sách các Chương
         ///// </summary>
         //public virtual ICollection<Chapter> Chapters { get; set; }
-        
+
         ///// <summary>
         ///// Danh sách các Thể loại
         ///// </summary>
@@ -83,3 +117,4 @@ namespace VNStory.Web.Models
 
     }
 }
+
