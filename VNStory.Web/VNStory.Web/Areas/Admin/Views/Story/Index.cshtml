@@ -35,7 +35,7 @@
                             @Html.DisplayNameFor(model => model.Views)
                         </th>
 
-                        <th scope="col" class="col-2">
+                        <th scope="col" class="col-1">
                             @Html.DisplayNameFor(model => model.Index)
                         </th>
 
@@ -72,7 +72,7 @@
                                                 }
                                             </td>
                                             <td valign="middle">
-                                                @Html.DisplayFor(modelItem => item.Name)
+                                                @Html.ActionLink(item.Name, "Index", "Chapter", new { storyId = item.Id }, null)
                                             </td>
                                             <td>
                                                 @{
@@ -97,15 +97,11 @@
                                                 @Html.DisplayName(statusName)
                                             </td>
                                             <td valign="middle">
-                                                @Html.DisplayFor(modelItem => item.Name)
+                                                @Html.DisplayFor(modelItem => item.Views)
                                             </td>
                                             <td valign="middle">
                                                 @Html.DisplayFor(modelItem => item.Index)
                                             </td>
-
-
-
-
 
                                             <td valign="middle">
                                                 @Html.ActionLink("Chi tiết", "Details", new { id = item.Id })
@@ -116,18 +112,7 @@
                                             <td valign="middle">
                                                 @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
                                             </td>
-                                            @*<td>
-            @Html.DisplayFor(modelItem => item.Views)
-        </td>
-        <td>
-            @Html.ActionLink("Chi tiết", "Details", new { id = item.Id })
-        </td>
-        <td>
-            @Html.ActionLink("Sửa", "Edit", new { id = item.Id })
-        </td>
-        <td>
-            @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
-        </td>*@
+                                           
                                         </tr>
                             { _index++; }
                         }

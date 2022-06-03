@@ -16,30 +16,48 @@ namespace VNStory.Web.Areas.Admin.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         //Id của truyện
-        public ActionResult Index(String id)
+        public ActionResult Index(string storyId)
         {
+            //Cờ cho phép tạo mới hay không
+            bool enableCreateNew = false;//Mặc định là có
+
             //Khai báo biến danh sách chương
             List<Chapter> _list = new List<Chapter>();
 
             //Kiểm tra xem biến Id có giá tị hay không
-            if (string.IsNullOrEmpty(id) == false)
+            if (string.IsNullOrEmpty(storyId) == false)
             {
+                //Đánh dấu cho phép tạo mới
+                enableCreateNew = true;
+
                 //Có giá trị, tìm truyện có Id = giá trị của biến Id
-                var story = db.Stories.Find(id);
+                var story = db.Stories.Find(int.Parse(storyId));
 
                 if (story != null)
                 {
+                    ViewBag.StoryName = story.Name;
+                    ViewBag.StoryId = story.Id.ToString();
+
                     //Lấy danh sách chương của truyện theo giá trị của Id
                     _list = db.Chapters.Where(p => p.StoryId == story.Id).ToList();
+
+                    //Gán giá trị cho thuộc tính Story
+                    foreach (Chapter chapter in _list)
+                    {
+                        chapter.Story = story;
+                    }
+
                 }
             }
+
+            ViewBag.EnableCreateNew = enableCreateNew;
 
             return View(_list);
         }
 
-        public ActionResult Details(String id)
+        public ActionResult Details(string chapterId, string storyId)
         {
-            var chapter = db.Chapters.Find(id);
+            var chapter = db.Chapters.Find(chapterId);
 
             if (chapter == null)
             {
@@ -49,182 +67,69 @@ namespace VNStory.Web.Areas.Admin.Controllers
             return View(chapter);
         }
 
-        public ActionResult Create(String id)
+        public ActionResult Create(string storyId)
         {
-            //Có giá trị, tìm truyện có Id = giá trị của biến Id
-            var story = db.Stories.Find(id);
+            //Kiểm tra xem biến Id có giá tị hay không
+            if (string.IsNullOrEmpty(storyId) == false)
+            {
+                //Có giá trị, tìm truyện có Id = giá trị của biến Id
+                var story = db.Stories.Find(int.Parse(storyId));
+                if (story != null)
+                {
+                    ViewBag.StoryName = story.Name;
+                    ViewBag.StoryId = story.Id;
+                }
+            }
 
-            return View(story);
+            return View();
         }
 
         [HttpPost]
         public ActionResult Create(Chapter chapter)
         {
+            int storyId = chapter.StoryId;
+
             if (ModelState.IsValid)
             {
                 db.Chapters.Add(chapter);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+
+                return RedirectToAction("Index", new { storyId = storyId });
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { storyId = storyId });
         }
 
-
-
-        public ActionResult Create()
+        public ActionResult Edit(string chapterId)
         {
-            List<SelectListItem> listDoiTuong = new List<SelectListItem>();
-
-            SelectListItem selectListItem;
-
-            foreach (int item in Enum.GetValues(typeof(StatusInfor)))
-            {
-                selectListItem = new SelectListItem();
-
-                if (item == 0)
-                {
-                    selectListItem.Value = item.ToString();
-
-                    selectListItem.Text = "Thiếu Nhi";
-                }
-                else if (item == 1)
-                {
-                    selectListItem.Value = item.ToString();
-
-                    selectListItem.Text = "Mới Lớn";
-                }
-                else if (item == 2)
-                {
-                    selectListItem.Value = item.ToString();
-
-                    selectListItem.Text = "Tuổi Hồng";
-                }
-                else if (item == 3)
-                {
-                    selectListItem.Value = item.ToString();
-
-                    selectListItem.Text = "Đọc Tạp";
-                }
-
-                if (listDoiTuong.Any(p => p.Value == selectListItem.Value) == false)
-                {
-                    listDoiTuong.Add(selectListItem);
-                }
-
-            }
-
-            ViewBag.listDoiTuong = new SelectList(listDoiTuong, "Value", "Text");
-
-            List<SelectListItem> chapterlist = new List<SelectListItem>();
-            foreach (Chapter item in db.Chapters.ToList())
-            {
-                chapterlist.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
-            }
-            ViewBag.chapterlist = new SelectList(chapterlist, "Value", "Text");
-
-            return View();
-        }
-
-        //[HttpPost]
-        //public ActionResult Create(Chapter chapter)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Chapters.Add(chapter);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return RedirectToAction("Index");
-        //}
-
-
-
-
-        //public ActionResult Edit(String id)
-        //{
-        //    var chapter = db.Chapters.Find(id);
-        //    if (chapter == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(chapter);
-        //}
-
-
-
-        public ActionResult Edit(int id)
-        {
-            var chapterItem = db.Chapters.Find(id);
+            var chapterItem = db.Chapters.Find(int.Parse(chapterId));
 
             if (chapterItem == null)
             {
                 return HttpNotFound();
             }
 
-            #region Danh sách trạng thái truyện
-
-            List<SelectListItem> listDoiTuong = new List<SelectListItem>();
-
-            SelectListItem selectListItem;
-
-            foreach (int item in Enum.GetValues(typeof(StatusInfor)))
-            {
-                selectListItem = new SelectListItem();
-
-                if (item == 0)
-                {
-                    selectListItem.Value = item.ToString();
-
-                    selectListItem.Text = "Thiếu Nhi";
-                }
-                else if (item == 1)
-                {
-                    selectListItem.Value = item.ToString();
-
-                    selectListItem.Text = "Mới Lớn";
-                }
-                else if (item == 2)
-                {
-                    selectListItem.Value = item.ToString();
-
-                    selectListItem.Text = "Tuổi Hồng";
-                }
-                else if (item == 3)
-                {
-                    selectListItem.Value = item.ToString();
-
-                    selectListItem.Text = "Đọc Tạp";
-                }
-
-                if (listDoiTuong.Any(p => p.Value == selectListItem.Value) == false)
-                {
-                    listDoiTuong.Add(selectListItem);
-                }
-
-            }
-
-            ViewBag.listDoiTuong = new SelectList(listDoiTuong, "Value", "Text");
-
             return View(chapterItem);
         }
 
-
-
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content,NumberChapter,Story,StoryId")] Chapter chapter)
+        public ActionResult Edit([Bind(Include = "Id,Title,Content,NumberChapter,StoryId")] Chapter chapter)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(chapter).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                int storyId = chapter.StoryId;
+
+                return RedirectToAction("Index", new { storyId = storyId });
             }
             return View(chapter);
         }
 
-        public ActionResult Delete(String id)
+        public ActionResult Delete(string chapterId)
         {
-            var chapter = db.Chapters.Find(id);
+            var chapter = db.Chapters.Find(chapterId);
             if (chapter == null)
             {
                 return HttpNotFound();
@@ -236,11 +141,12 @@ namespace VNStory.Web.Areas.Admin.Controllers
         public ActionResult Delete(Chapter chapter)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 var myChapter = db.Chapters.Find(chapter.Id);
+                int storyId = myChapter.StoryId;
                 db.Chapters.Remove(myChapter);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { storyId = storyId });
             }
             return View(chapter);
         }

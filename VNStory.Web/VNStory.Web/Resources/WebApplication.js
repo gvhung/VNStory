@@ -9,6 +9,7 @@ function getRootUrl() {
 
 $(document).ready(function () {
 
+    //Menu user loged-in
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('.dropdown-menu').forEach(function (element) {
             element.addEventListener('click', function (e) {
@@ -17,13 +18,16 @@ $(document).ready(function () {
         })
     });
 
-    //Khởi tạo Tooltip
-    new jBox('Tooltip', {
-        attach: $("[role=tooltip]"),
-        trigger: 'mouseenter',
-        getTitle: 'data-jbox-title',
-        getContent: 'data-jbox-content'
-    });
+    //Enable Text Editor
+    //$('#Content').summernote();
+
+    ////Khởi tạo Tooltip
+    //new jBox('Tooltip', {
+    //    attach: $("[role=tooltip]"),
+    //    trigger: 'mouseenter',
+    //    getTitle: 'data-jbox-title',
+    //    getContent: 'data-jbox-content'
+    //});
 
     //$('.tooltip').jBox('Tooltip', {
     //    trigger: 'mouseenter',

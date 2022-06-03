@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace VNStory.Web.Models
@@ -43,7 +44,7 @@ namespace VNStory.Web.Models
         /// <summary>
         /// Đối tượng Truyện
         /// </summary>
-        [Display(Name = "Đối Tượng Đọc")]
+        [NotMapped]
         public virtual Story Story { get; set; }
 
         ///// <summary>

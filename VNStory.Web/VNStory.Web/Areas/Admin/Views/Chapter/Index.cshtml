@@ -2,18 +2,21 @@
 @{
     ViewBag.Title = "Chapter";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string displayCreateNew = ViewBag.EnableCreateNew == true ? "inline-block" : "none";
+    string storyName = ViewBag.StoryName;
+    string storyId = ViewBag.StoryId;
 }
 
 <div class="container-fluid">
 
-    <h2>Nhóm người dùng</h2>
+    <h2>@storyName</h2>
 
     <div class="row py-1">
         <div class="col-md-9 me-auto">
-            <h4 class="card-title">Danh sách nhóm người dùng</h4>
+            <h4 class="card-title">Danh sách chương</h4>
         </div>
         <div class="col-md-3 text-end">
-            @Html.ActionLink("Thêm mới", "Create", "Chapter", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-primary" })
+            @Html.ActionLink("Thêm mới", "Create", "Chapter", new { storyId = storyId }, htmlAttributes: new { @class = "btn btn-primary", Style = "display:" + displayCreateNew })
         </div>
     </div>
 
@@ -29,24 +32,19 @@
                             @Html.DisplayNameFor(model => model.Title)
                         </th>
                         <th scope="col" class="col-1">
-                            @Html.DisplayNameFor(model => model.Story)
+                            @Html.DisplayNameFor(model => model.Story.Name)
                         </th>
                         <th scope="col" class="col-1">
                             @Html.DisplayNameFor(model => model.NumberChapter)
                         </th>
-
                         <th scope="col" class="col-1">
-                            @Html.DisplayNameFor(model => model.StoryId)
-                        </th>
-
-                        <th scope="col" class="col-1">
-
+                            #
                         </th>
                         <th scope="col" class="col-1">
-
+                            #
                         </th>
                         <th scope="col" class="col-1">
-
+                            #
                         </th>
 
                     </tr>
@@ -66,34 +64,12 @@
                                             <td valign="middle">
                                                 @Html.DisplayFor(modelItem => item.Title)
                                             </td>
-                                            <td>
-                                                @{
-                                                    string statusTitle = "Hãy chọn";
-
-                                                    if (item.Story == 0)
-                                                    {
-                                                        statusTitle = "Thiếu Nhi";
-                                                    }
-                                                    else if (item.Story == 1)
-                                                    {
-                                                        statusTitle = "Mới Lớn";
-                                                    }
-                                                    else if (item.Story == 2)
-                                                    {
-                                                        statusTitle = "Tuổi Hồng";
-                                                    }
-                                                    else if (item.Story == 0)
-                                                    {
-                                                        statusTitle = "Đọc Tạp";
-                                                    }
-                                                }
-                                                @Html.DisplayName(statusTitle)
+                                            <td valign="middle">
+                                                @Html.DisplayFor(modelItem => item.Story.Name)
                                             </td>
+
                                             <td valign="middle">
                                                 @Html.DisplayFor(modelItem => item.NumberChapter)
-                                            </td>
-                                            <td valign="middle">
-                                                @Html.DisplayFor(modelItem => item.StoryId)
                                             </td>
 
                                             <td>
