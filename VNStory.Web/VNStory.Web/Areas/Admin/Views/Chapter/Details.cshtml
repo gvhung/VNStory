@@ -1,6 +1,6 @@
-﻿@model  Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+﻿@model  VNStory.Web.Models.Chapter
 @{
-    ViewBag.Title = "Roles";
+    ViewBag.Title = "Chapter";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,13 +8,37 @@
     <h4>Nhóm người dùng</h4>
     <hr />
     <div class="mb-3">
-        <label class="form-label">@Html.DisplayNameFor(model => model.Name)</label>
+        <label class="form-label">@Html.DisplayNameFor(model => model.Title)</label>
     </div>
     <div class="mb-3">
-        <label class="form-label">@Html.DisplayFor(model => model.Name)</label>
+        <label class="form-label">@Html.DisplayFor(model => model.Title)</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.Content)</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.Content)</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.NumberChapter)</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.NumberChapter)</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.StoryId)</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.StoryId)</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayNameFor(model => model.Story)</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">@Html.DisplayFor(model => model.Story)</label>
     </div>
     <div class="col-12">
-        @Html.ActionLink("Chỉnh sửa", "Edit", "Roles", routeValues: new { Area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
-        @Html.ActionLink("Trở lại", "Index", "Roles", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" })
+        @Html.ActionLink("Chỉnh sửa", "Edit", "Chapter", routeValues: new { Area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("Trở lại", "Index", "Chapter", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" })
     </div>
 </div>

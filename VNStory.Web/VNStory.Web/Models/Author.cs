@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -30,7 +30,7 @@ namespace VNStory.Web.Models
         /// <summary>
         /// Thứ tự hiển thị
         /// </summary>
-        [Display(Name = "Thứ tự hiển thị")]
+        [Display(Name = "Tuổi")]
         public int Index { get; set; } = 0;
 
         /// <summary>

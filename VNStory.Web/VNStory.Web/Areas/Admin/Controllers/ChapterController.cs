@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using VNStory.Web.Commons;
 using VNStory.Web.DataContexts;
 using VNStory.Web.Models;
 
@@ -67,18 +69,149 @@ namespace VNStory.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(String id)
+
+
+        public ActionResult Create()
         {
-            var chapter = db.Chapters.Find(id);
-            if (chapter == null)
+            List<SelectListItem> listDoiTuong = new List<SelectListItem>();
+
+            SelectListItem selectListItem;
+
+            foreach (int item in Enum.GetValues(typeof(StatusInfor)))
+            {
+                selectListItem = new SelectListItem();
+
+                if (item == 0)
+                {
+                    selectListItem.Value = item.ToString();
+
+                    selectListItem.Text = "Thiếu Nhi";
+                }
+                else if (item == 1)
+                {
+                    selectListItem.Value = item.ToString();
+
+                    selectListItem.Text = "Mới Lớn";
+                }
+                else if (item == 2)
+                {
+                    selectListItem.Value = item.ToString();
+
+                    selectListItem.Text = "Tuổi Hồng";
+                }
+                else if (item == 3)
+                {
+                    selectListItem.Value = item.ToString();
+
+                    selectListItem.Text = "Đọc Tạp";
+                }
+
+                if (listDoiTuong.Any(p => p.Value == selectListItem.Value) == false)
+                {
+                    listDoiTuong.Add(selectListItem);
+                }
+
+            }
+
+            ViewBag.listDoiTuong = new SelectList(listDoiTuong, "Value", "Text");
+
+            List<SelectListItem> chapterlist = new List<SelectListItem>();
+            foreach (Chapter item in db.Chapters.ToList())
+            {
+                chapterlist.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
+            }
+            ViewBag.chapterlist = new SelectList(chapterlist, "Value", "Text");
+
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult Create(Chapter chapter)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Chapters.Add(chapter);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return RedirectToAction("Index");
+        //}
+
+
+
+
+        //public ActionResult Edit(String id)
+        //{
+        //    var chapter = db.Chapters.Find(id);
+        //    if (chapter == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(chapter);
+        //}
+
+
+
+        public ActionResult Edit(int id)
+        {
+            var chapterItem = db.Chapters.Find(id);
+
+            if (chapterItem == null)
             {
                 return HttpNotFound();
             }
-            return View(chapter);
+
+            #region Danh sách trạng thái truyện
+
+            List<SelectListItem> listDoiTuong = new List<SelectListItem>();
+
+            SelectListItem selectListItem;
+
+            foreach (int item in Enum.GetValues(typeof(StatusInfor)))
+            {
+                selectListItem = new SelectListItem();
+
+                if (item == 0)
+                {
+                    selectListItem.Value = item.ToString();
+
+                    selectListItem.Text = "Thiếu Nhi";
+                }
+                else if (item == 1)
+                {
+                    selectListItem.Value = item.ToString();
+
+                    selectListItem.Text = "Mới Lớn";
+                }
+                else if (item == 2)
+                {
+                    selectListItem.Value = item.ToString();
+
+                    selectListItem.Text = "Tuổi Hồng";
+                }
+                else if (item == 3)
+                {
+                    selectListItem.Value = item.ToString();
+
+                    selectListItem.Text = "Đọc Tạp";
+                }
+
+                if (listDoiTuong.Any(p => p.Value == selectListItem.Value) == false)
+                {
+                    listDoiTuong.Add(selectListItem);
+                }
+
+            }
+
+            ViewBag.listDoiTuong = new SelectList(listDoiTuong, "Value", "Text");
+
+            return View(chapterItem);
         }
 
+
+
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content,NumberChapter,StoryId")] Chapter chapter)
+        public ActionResult Edit([Bind(Include = "Id,Title,Content,NumberChapter,Story,StoryId")] Chapter chapter)
         {
             if (ModelState.IsValid)
             {

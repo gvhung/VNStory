@@ -1,6 +1,6 @@
-﻿@model  Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+﻿@model  VNStory.Web.Models.Chapter
 @{
-    ViewBag.Title = "Roles";
+    ViewBag.Title = "Chapter";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,27 +10,27 @@
     <hr />
     
     <div class="mb-3">
-        <label class="form-label">@Html.DisplayNameFor(model => model.Name)</label>
+        <label class="form-label">@Html.DisplayNameFor(model => model.Title)</label>
     </div>
     
     <div class="mb-3">
-        <label class="form-label">@Html.DisplayFor(model => model.Name)</label>
+        <label class="form-label">@Html.DisplayFor(model => model.Title)</label>
     </div>
 
     <div class="form-actions no-color">
 
-        @using (Html.BeginForm("Delete", "Roles", FormMethod.Post, new { role = "form" }))
+        @using (Html.BeginForm("Delete", "Chapter", FormMethod.Post, new { role = "form" }))
         {
             @Html.AntiForgeryToken()
-            if (Model?.Name != "Administrators")
+            if (Model?.Title != "Administrators")
             {
-                if (Model?.Name != "Users")
+                if (Model?.Title != "Users")
                 {
                     <input type="submit" value="Xóa nhóm này" class="btn btn-danger" />
                 }
             }
 
-            @Html.ActionLink("Back to List", "Index", "Roles", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" });
+            @Html.ActionLink("Back to List", "Index", "Chapter", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" });
         }
 
     </div>
