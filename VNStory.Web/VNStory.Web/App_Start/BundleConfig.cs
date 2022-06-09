@@ -23,7 +23,7 @@ namespace VNStory.Web
 #endif
 
             string[] javascriptItems = {
-                "~/Resources/jquery/jquery-3.6.0"+minify+"js",
+                "~/Resources/jquery/jquery-3.6.0."+minify+"js",
                 "~/Resources/jquery/jquery-migrate-3.4.0."+minify+"js",
                 "~/Resources/jquery-ui-1.13.1/jquery-ui."+minify+"js",
                 //"~/Resources/popper-1.16.0/popper."+minify+"js",
@@ -35,7 +35,7 @@ namespace VNStory.Web
                 "~/Resources/jquery-blockUI-2.70/jquery.blockUI."+minify+"js",
                 "~/Resources/jquery-dateFormat/jquery-dateFormat."+minify+"js",
                 "~/Resources/jbox-1.3.3/jBox.all."+minify+"js",
-                //"~/Resources/summernote-0.8.18/summernote."+minify+"js",
+                "~/Resources/SunEditor-2.43.8/suneditor.min.js",
                 "~/Resources/WebApplication."+minify+"js"
             };
 
@@ -46,7 +46,7 @@ namespace VNStory.Web
                 "~/Resources/bootstrap-icons-1.8.1/bootstrap-icons."+minify+"css",
                 "~/Resources/tablesorter-2.31.3/css/theme.blue."+minify+"css",
                 "~/Resources/jbox-1.3.3/jBox.all."+minify+"css",
-                //"~/Resources/summernote-0.8.18/summernote."+minify+"css",
+                "~/Resources/SunEditor-2.43.8/css/suneditor.min.css",
             };
 
             //bundles.Add(new ScriptBundle("~/Resources/script").Include(javascriptItems));

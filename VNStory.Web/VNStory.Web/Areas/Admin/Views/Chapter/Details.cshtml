@@ -31,15 +31,15 @@
     <div class="mb-3">
         <label class="form-label">@Html.DisplayFor(model => model.NumberChapter)</label>
     </div>
-    <div class="mb-3">
+    @*<div class="mb-3">
         <label class="form-label">@Html.DisplayNameFor(model => model.StoryId)</label>
     </div>
     <div class="mb-3">
         <label class="form-label">@Html.DisplayFor(model => model.StoryId)</label>
-    </div>
+    </div>*@
 
-    <div class="col-12">
-        @Html.ActionLink("Chỉnh sửa", "Edit", "Chapter", routeValues: new { Area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
-        @Html.ActionLink("Trở lại", "Index", "Chapter", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" })
-    </div>
+<div class="col-12">
+    @Html.ActionLink("Chỉnh sửa", "Edit", "Chapter", routeValues: new { Area = "Admin", id = Model.Id, storyId = Model.StoryId }, htmlAttributes: new { @class = "btn btn-primary" })
+    @Html.ActionLink("Trở lại", "Index", "Chapter", routeValues: new { Area = "Admin", storyId = Model.StoryId }, htmlAttributes: new { @class = "btn btn-secondary" })
+</div>
 </div>

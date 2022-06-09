@@ -74,13 +74,13 @@
                                             </td>
 
                                             <td>
-                                                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id })
+                                                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id, storyId = item.StoryId })
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Sửa", "Edit", new { id = item.Id })
+                                                @Html.ActionLink("Sửa", "Edit", new { id = item.Id, storyId = item.StoryId })
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                                                @Html.ActionLink("Xóa", "Delete", new { id = item.Id, storyId = item.StoryId })
                                             </td>
                                         </tr>
                             { _index++; }

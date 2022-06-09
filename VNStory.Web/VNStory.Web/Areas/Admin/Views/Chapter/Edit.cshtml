@@ -9,11 +9,17 @@
     {
         @Html.AntiForgeryToken()
 
-        <h4>Chỉnh sửa nhóm người dùng</h4>
+        <h4>Chỉnh sửa chương cho truyện [@Model.Story.Name]</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.StoryId)
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.NumberChapter, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.NumberChapter, new { htmlAttributes = new { @class = "form-control", placeholder = "Số chương", @autocomplete = "off" } })
+            @Html.ValidationMessageFor(model => model.NumberChapter, "", new { @class = "text-danger" })
+        </div>
 
         <div class="mb-3">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "form-label" })
@@ -28,25 +34,8 @@
         </div>
 
         <div class="mb-3">
-            @Html.LabelFor(model => model.NumberChapter, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.NumberChapter, new { htmlAttributes = new { @class = "form-control", placeholder = "Số chương", @autocomplete = "off" } })
-            @Html.ValidationMessageFor(model => model.NumberChapter, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="mb-3">
-            @Html.LabelFor(model => model.StoryId, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.StoryId, new { htmlAttributes = new { @class = "form-control", placeholder = "Mã truyện", @autocomplete = "off" } })
-            @Html.ValidationMessageFor(model => model.StoryId, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="mb-3">
-            @Html.LabelFor(model => model.Story.Name, htmlAttributes: new { @class = "form-label" })
-            @Html.DropDownListFor(model => model.Story.Name, ViewBag.ListTrangThai as SelectList, htmlAttributes: new { @class = "form-select" })
-        </div>
-
-        <div class="mb-3">
             <input type="submit" value="Cập nhật" class="btn btn-primary" />
-            @Html.ActionLink("Trở lại", "Index", "Chapter", routeValues: new { Area = "Admin" }, htmlAttributes: new { @class = "btn btn-secondary" })
+            @Html.ActionLink("Trở lại", "Index", "Chapter", routeValues: new { Area = "Admin", storyId = Model.StoryId }, htmlAttributes: new { @class = "btn btn-secondary" })
         </div>
     }
 </div>
