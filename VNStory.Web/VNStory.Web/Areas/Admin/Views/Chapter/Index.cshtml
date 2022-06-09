@@ -29,10 +29,10 @@
                             #
                         </th>
                         <th scope="col" class="col-auto">
-                            @Html.DisplayNameFor(model => model.Title)
+                            @Html.DisplayNameFor(model => model.Story.Name)
                         </th>
                         <th scope="col" class="col-1">
-                            @Html.DisplayNameFor(model => model.Story.Name)
+                            @Html.DisplayNameFor(model => model.Title)
                         </th>
                         <th scope="col" class="col-1">
                             @Html.DisplayNameFor(model => model.NumberChapter)
@@ -62,10 +62,11 @@
                                             </td>
 
                                             <td valign="middle">
-                                                @Html.DisplayFor(modelItem => item.Title)
+                                                @Html.DisplayFor(modelItem => item.Story.Name)
                                             </td>
                                             <td valign="middle">
-                                                @Html.DisplayFor(modelItem => item.Story.Name)
+                                                
+                                                @Html.DisplayFor(modelItem => item.Title)
                                             </td>
 
                                             <td valign="middle">

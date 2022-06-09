@@ -40,8 +40,8 @@
         </div>
 
         <div class="mb-3">
-            @Html.LabelFor(model => model.Story, htmlAttributes: new { @class = "form-label" })
-            @Html.DropDownListFor(model => model.Story, ViewBag.ListTrangThai as SelectList, htmlAttributes: new { @class = "form-select" })
+            @Html.LabelFor(model => model.Story.Name, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.Story.Name, ViewBag.ListTrangThai as SelectList, htmlAttributes: new { @class = "form-select" })
         </div>
 
         <div class="mb-3">

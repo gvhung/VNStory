@@ -55,9 +55,9 @@ namespace VNStory.Web.Areas.Admin.Controllers
             return View(_list);
         }
 
-        public ActionResult Details(string chapterId, string storyId)
+        public ActionResult Details(string id, string storyId)
         {
-            var chapter = db.Chapters.Find(chapterId);
+            var chapter = db.Chapters.Find(id);
 
             if (chapter == null)
             {
@@ -100,9 +100,9 @@ namespace VNStory.Web.Areas.Admin.Controllers
             return RedirectToAction("Index", new { storyId = storyId });
         }
 
-        public ActionResult Edit(string chapterId)
+        public ActionResult Edit(string id)
         {
-            var chapterItem = db.Chapters.Find(int.Parse(chapterId));
+            var chapterItem = db.Chapters.Find(int.Parse(id));
 
             if (chapterItem == null)
             {
@@ -127,9 +127,9 @@ namespace VNStory.Web.Areas.Admin.Controllers
             return View(chapter);
         }
 
-        public ActionResult Delete(string chapterId)
+        public ActionResult Delete(string id)
         {
-            var chapter = db.Chapters.Find(chapterId);
+            var chapter = db.Chapters.Find(id);
             if (chapter == null)
             {
                 return HttpNotFound();
