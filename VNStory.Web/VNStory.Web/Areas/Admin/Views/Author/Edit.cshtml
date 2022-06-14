@@ -28,11 +28,11 @@
         </div>
 
         <div class="mb-3">
-            @Html.LabelFor(model => model.ImagePaths, htmlAttributes: new { @class = "form-label" })
-            @Html.TextBoxFor(model => model.ImagePaths, htmlAttributes: new { type = "file", name = "file", @class = "form-control" })
+            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.ImagePath, htmlAttributes: new { type = "file", name = "file", @class = "form-control" })
         </div>
 
-        if (Model.ImagePaths != null)
+        if (Model.ImagePath != null)
         {
             <div class="mb-3">
                 @Html.CheckBoxFor(model => model.RemoveImage, htmlAttributes: new { @checked = "checked", @class = "form-check-input" })

@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
 
-    <h3>Bạn muốn xóa thể loại này phải không?</h3>
+    <h3>Bạn muốn xóa tác giả này phải không?</h3>
     <hr />
 
     <div class="mb-3">
@@ -17,7 +17,7 @@
         <label class="form-label">@Html.DisplayFor(model => model.Name)</label>
     </div>
 
-    @if (Model.ImagePaths != null)
+    @if (Model.ImagePath != null)
     {
         <div class="mb-3">
             <img src="@Model.ImageUrl" class="img-thumbnail" alt="@Model.Name" width="350" />
@@ -32,7 +32,7 @@
             @*<input id="btDeleteCategory" type="submit" value="Xóa thể loại này" class="btn btn-danger" />*@
             
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#dlgDeleteConfirm">
-                Xóa thể loại này
+                Xóa tác giả này
             </button>
             
             <div class="modal fade" id="dlgDeleteConfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
